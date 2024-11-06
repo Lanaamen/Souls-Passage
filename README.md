@@ -7,3 +7,6 @@
 
  Cemetary
  https://assetstore.unity.com/packages/3d/environments/stylized-cemetery-pack-56402
+
+ Book
+ https://assetstore.unity.com/packages/3d/props/grimoire-style-book-3996
