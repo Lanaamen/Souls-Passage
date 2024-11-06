@@ -10,3 +10,6 @@
 
  Book
  https://assetstore.unity.com/packages/3d/props/grimoire-style-book-3996
+
+ Magic fire (SoulOrb)
+ https://assetstore.unity.com/packages/vfx/particles/fire-explosions/procedural-fire-141496#publisher
