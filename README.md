@@ -13,3 +13,6 @@
 
  Magic fire (SoulOrb)
  https://assetstore.unity.com/packages/vfx/particles/fire-explosions/procedural-fire-141496#publisher
+
+frame
+https://assetstore.unity.com/packages/3d/props/interior/picture-frames-with-photos-106907
