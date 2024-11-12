@@ -7236,7 +7236,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1056215112
 Transform:
   m_ObjectHideFlags: 0
@@ -9725,7 +9725,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1517142563
 Transform:
   m_ObjectHideFlags: 0
@@ -15446,6 +15446,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1298998769}
   - {fileID: 705507995}
   - {fileID: 2060014882}
   - {fileID: 965501031}
@@ -15453,7 +15454,6 @@ SceneRoots:
   - {fileID: 1572109254}
   - {fileID: 673841488}
   - {fileID: 2126589201}
-  - {fileID: 1298998769}
   - {fileID: 1517142563}
   - {fileID: 960355526}
   - {fileID: 1308953360}
