@@ -9,6 +9,9 @@ public class SoulManager : MonoBehaviour
     [SerializeField] private Riddle[] riddles;  // Array of Riddle ScriptableObject references
     private int currentRiddleIndex = 0;  // Keeps track of which riddle to show
 
+    // Set the initial position for the soul
+    private Vector3 soulInitialPosition = new Vector3(-0.27f, -1.16f, 0f);
+
     void Start()
     {
         // Start with both the soul and riddle text hidden
@@ -21,6 +24,9 @@ public class SoulManager : MonoBehaviour
     {
         if (currentRiddleIndex < riddles.Length)
         {
+            // Set the soul's position to the initial position you defined
+            soul.transform.position = soulInitialPosition;
+
             // Show the soul and display the current riddle text
             soul.SetActive(true);
             riddleText.text = riddles[currentRiddleIndex].riddleText;  // Set riddle text
