@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b1eb01efff5f9548aab6871068b1687, type: 3}
   m_Name: Riddle8
   m_EditorClassIdentifier: 
-  riddleText: 
+  riddleText: "\u201CThrough chaos I dance, igniting the flame, With visions of futures
+    that bear no name. The ashes of silence echo what\u2019s lost, Am I a creator,
+    or just counting the cost?\u201D"
   isGoodSoul: 0

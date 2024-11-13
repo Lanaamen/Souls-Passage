@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b1eb01efff5f9548aab6871068b1687, type: 3}
   m_Name: Riddle3
   m_EditorClassIdentifier: 
-  riddleText: 
+  riddleText: "\u201CI seek distant lands,  but the path I resist, My heart wants
+    to roam,  yet my mind has a twist. I chase the horizon  while fearing the fall,
+    Am I a seeker,  or lost in it all?\u201D"
   isGoodSoul: 0

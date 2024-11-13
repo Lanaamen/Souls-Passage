@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b1eb01efff5f9548aab6871068b1687, type: 3}
   m_Name: Riddle5
   m_EditorClassIdentifier: 
-  riddleText: 
+  riddleText: "\u201CWith visions like towers,  I strive to create, Yet the weight
+    of ambition  can alter my fate. Each stone I lay down  feels heavy and cold,
+    Am I building a dream,  or a story untold?\u201D"
   isGoodSoul: 0

@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b1eb01efff5f9548aab6871068b1687, type: 3}
   m_Name: Riddle6
   m_EditorClassIdentifier: 
-  riddleText: 
-  isGoodSoul: 0
+  riddleText: "\u201CIn the depths of night, I quietly give, My shadow lingers where
+    lost hopes live. A vessel of whispers, I offer a spark, But tread lightly, for
+    I might leave a mark.\u201D"
+  isGoodSoul: 1

@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b1eb01efff5f9548aab6871068b1687, type: 3}
   m_Name: Riddle7
   m_EditorClassIdentifier: 
-  riddleText: 
+  riddleText: "\u201CIn a web of charm, I weave my design, Each thread a reflection,
+    each smile a line. Yet within the tapestry, a truth lies concealed, What glitters
+    is gold, but the heart may be sealed.\u201D"
   isGoodSoul: 0

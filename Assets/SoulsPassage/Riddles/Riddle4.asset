@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b1eb01efff5f9548aab6871068b1687, type: 3}
   m_Name: Riddle4
   m_EditorClassIdentifier: 
-  riddleText: 
-  isGoodSoul: 0
+  riddleText: "\u201CA flicker of kindness, a glance in the fray, I\u2019m the warmth
+    in the moment that quickly fades away. My light shines so briefly, like dew in
+    the dawn, Am I a blessing, or merely withdrawn?\u201D"
+  isGoodSoul: 1

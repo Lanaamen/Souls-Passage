@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b1eb01efff5f9548aab6871068b1687, type: 3}
   m_Name: Riddle9
   m_EditorClassIdentifier: 
-  riddleText: 
+  riddleText: "\u201CI wander through meadows with chains in my heart, Seeking the
+    light, yet I struggle to start. My dreams are like whispers, they call from afar,
+    Am I a seeker of truth, or trapped by a scar?\u201D"
   isGoodSoul: 0
