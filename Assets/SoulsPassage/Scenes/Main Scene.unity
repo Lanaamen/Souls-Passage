@@ -7336,7 +7336,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9b3fe795991e3cb4ea9eef83b92fe4f6, type: 2}
+  - {fileID: 2100000, guid: 0502887be4758934c914be2f5d5eb0c9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -11463,6 +11463,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   videoPlayer: {fileID: 1620377823}
   playButton: {fileID: 968370810}
+  videoScreenRenderer: {fileID: 1004158099}
+  placeholderMaterial: {fileID: 2100000, guid: 8541f5b4af55cc742a632c11ef7cd94f, type: 2}
+  videoMaterial: {fileID: 2100000, guid: 0502887be4758934c914be2f5d5eb0c9, type: 2}
 --- !u!328 &1620377823
 VideoPlayer:
   m_ObjectHideFlags: 0
