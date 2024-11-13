@@ -4935,6 +4935,7 @@ GameObject:
   - component: {fileID: 807871068}
   - component: {fileID: 807871067}
   - component: {fileID: 807871066}
+  - component: {fileID: 807871069}
   m_Layer: 5
   m_Name: Bring Soul
   m_TagString: Untagged
@@ -5056,6 +5057,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 807871064}
   m_CullTransparentMesh: 1
+--- !u!65 &807871069
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 807871064}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 98.6971, y: 97.254524, z: 6.118194}
+  m_Center: {x: 0.6949098, y: -0.5633123, z: -1.2517145}
 --- !u!4 &813612300 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: eb7d6be84f24a754094eb63a459c441d, type: 3}
@@ -6072,6 +6094,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5123763656955240964, guid: 6d5c973482b67d04e8b5574a2dc815a5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2136851889}
+    - targetCorrespondingSourceObject: {fileID: 5123763656955240964, guid: 6d5c973482b67d04e8b5574a2dc815a5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2136851895}
+    - targetCorrespondingSourceObject: {fileID: 5123763656955240964, guid: 6d5c973482b67d04e8b5574a2dc815a5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2136851896}
   m_SourcePrefab: {fileID: 100100000, guid: 6d5c973482b67d04e8b5574a2dc815a5, type: 3}
 --- !u!1 &965501028
 GameObject:
@@ -6358,6 +6386,7 @@ GameObject:
   - component: {fileID: 968370812}
   - component: {fileID: 968370811}
   - component: {fileID: 968370810}
+  - component: {fileID: 968370813}
   m_Layer: 0
   m_Name: PlayButton
   m_TagString: Untagged
@@ -6479,6 +6508,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 968370808}
   m_CullTransparentMesh: 1
+--- !u!65 &968370813
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968370808}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 12.049024, y: 12.8811455, z: 1.7601272}
+  m_Center: {x: 0.39509282, y: 0.23981483, z: 0.9980929}
 --- !u!1 &973483767
 GameObject:
   m_ObjectHideFlags: 0
@@ -9908,6 +9958,7 @@ GameObject:
   - component: {fileID: 1495333849}
   - component: {fileID: 1495333848}
   - component: {fileID: 1495333847}
+  - component: {fileID: 1495333850}
   m_Layer: 5
   m_Name: Down
   m_TagString: Untagged
@@ -10017,6 +10068,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1495333845}
   m_CullTransparentMesh: 1
+--- !u!65 &1495333850
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1495333845}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 98.6971, y: 97.254524, z: 6.118194}
+  m_Center: {x: 0.6949098, y: -0.5633123, z: -1.2517145}
 --- !u!1001 &1512811593
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10340,19 +10412,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1520555629}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1520555631}
-        m_TargetAssemblyTypeName: ButtonTest, Assembly-CSharp
-        m_MethodName: OnButtonClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1520555629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10391,18 +10451,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1520555626}
   m_CullTransparentMesh: 1
---- !u!114 &1520555631
-MonoBehaviour:
+--- !u!65 &1520555631
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1520555626}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fa69e1f5438d7041963d753b1e533dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  serializedVersion: 3
+  m_Size: {x: 98.6971, y: 97.254524, z: 6.118194}
+  m_Center: {x: 0.6949098, y: -0.5633123, z: -1.2517145}
 --- !u!1001 &1548687364
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15330,6 +15399,39 @@ MonoBehaviour:
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
+--- !u!65 &2136851895
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059227367}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.12319727, y: 0.19332199, z: 0.12494055}
+  m_Center: {x: -0.47388425, y: 0.76327443, z: 0.009888423}
+--- !u!114 &2136851896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059227367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1bc61505a562854eac08a47298b0515, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2141646791
 PrefabInstance:
   m_ObjectHideFlags: 0
