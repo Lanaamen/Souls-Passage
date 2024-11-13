@@ -10,9 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b1eb01efff5f9548aab6871068b1687, type: 3}
-  m_Name: Riddle1 - SelflessProvider
+  m_Name: Riddle9
   m_EditorClassIdentifier: 
-  riddleText: "\u201CI weave through the shadows,  a thread not seen, My presence
-    is felt,  though my face stays unseen. I gather the weary,  my hands open wide,
-    But the weight on my heart  I cannot abide.\u201D"
-  isGoodSoul: 1
+  riddleText: 
+  isGoodSoul: 0

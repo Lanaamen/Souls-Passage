@@ -10,9 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b1eb01efff5f9548aab6871068b1687, type: 3}
-  m_Name: Riddle2 - TheSilentObserver
+  m_Name: Riddle4
   m_EditorClassIdentifier: 
-  riddleText: "\u201CI linger in silence,  a ghost in your midst, I see all your
-    stories,  each smile, each twist. My words stay unspoken,  a book yet to read,
-    Am I the wise sage,  or a watcher in need?\u201D"
+  riddleText: 
   isGoodSoul: 0
