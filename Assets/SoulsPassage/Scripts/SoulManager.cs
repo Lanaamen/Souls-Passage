@@ -37,13 +37,12 @@ public class SoulManager : MonoBehaviour
     {
         if (currentRiddleIndex < riddles.Length)
         {
-            // Show the soul and display the current riddle text
-            soul.SetActive(true);
+            // Ensure the soul is visible and riddle text is updated
+            soul.SetActive(true);  // Activate the soul particle system
             riddleText.text = riddles[currentRiddleIndex].riddleText;  // Set riddle text
 
-            // You can check the `isGoodSoul` to determine if the soul should go to heaven or hell
-            bool isGood = riddles[currentRiddleIndex].isGoodSoul;
-            Debug.Log(isGood ? "This soul is good!" : "This soul is bad!");
+            // Optional debug to track progress
+            Debug.Log("Showing riddle: " + riddles[currentRiddleIndex].riddleText);
 
             // Move to the next riddle for the next button press
             currentRiddleIndex++;
@@ -58,7 +57,7 @@ public class SoulManager : MonoBehaviour
     public void ResetSoulAndRiddle()
     {
         currentRiddleIndex = 0;
-        soul.SetActive(false);
-        riddleText.text = "";
+        soul.SetActive(false);  // Hide the soul
+        riddleText.text = "";   // Clear the riddle text
     }
 }

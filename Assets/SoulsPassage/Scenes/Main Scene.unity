@@ -5311,9 +5311,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1585090062}
-        m_TargetAssemblyTypeName: SoulManager, Assembly-CSharp
-        m_MethodName: ShowRiddleAndSoul
+      - m_Target: {fileID: 1517142565}
+        m_TargetAssemblyTypeName: SoulThrow, Assembly-CSharp
+        m_MethodName: OnButtonPress
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10606,11 +10606,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grabInteractable: {fileID: 1517142566}
   soulRigidbody: {fileID: 1517142567}
-  throwForce: 10
   scoreText: {fileID: 1740579085}
   timerText: {fileID: 1642119401}
   score: 0
   timer: 60
+  soulManager: {fileID: 1585090062}
 --- !u!114 &1517142566
 MonoBehaviour:
   m_ObjectHideFlags: 0
