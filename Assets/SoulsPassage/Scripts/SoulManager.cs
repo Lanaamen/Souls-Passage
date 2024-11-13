@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -9,8 +10,7 @@ public class SoulManager : MonoBehaviour
     [SerializeField] private Riddle[] riddles;  // Array of Riddle ScriptableObject references
     private int currentRiddleIndex = 0;  // Keeps track of which riddle to show
 
-    // Set the initial position for the soul
-    private Vector3 soulInitialPosition = new Vector3(-0.27f, -1.16f, 0f);
+    public Animator soulAnimator;  // Reference to the Animator for soul animations
 
     void Start()
     {
@@ -24,9 +24,6 @@ public class SoulManager : MonoBehaviour
     {
         if (currentRiddleIndex < riddles.Length)
         {
-            // Set the soul's position to the initial position you defined
-            soul.transform.position = soulInitialPosition;
-
             // Show the soul and display the current riddle text
             soul.SetActive(true);
             riddleText.text = riddles[currentRiddleIndex].riddleText;  // Set riddle text
@@ -35,6 +32,8 @@ public class SoulManager : MonoBehaviour
             bool isGood = riddles[currentRiddleIndex].isGoodSoul;
             Debug.Log(isGood ? "This soul is good!" : "This soul is bad!");
 
+            // You can use this info later to trigger the appropriate animation
+
             // Move to the next riddle for the next button press
             currentRiddleIndex++;
         }
@@ -42,6 +41,22 @@ public class SoulManager : MonoBehaviour
         {
             riddleText.text = "No more riddles!";
         }
+    }
+
+    // Call this method when the heaven button is pressed
+    public void SendSoulToHeaven()
+    {
+        // Trigger the animation to send the soul to Heaven
+        soulAnimator.SetTrigger("HeavenTrigger");  // Use the trigger set in the Animator
+        Debug.Log("Sending soul to Heaven");
+    }
+
+    // Call this method when the hell button is pressed
+    public void SendSoulToHell()
+    {
+        // Trigger the animation to send the soul to Hell
+        soulAnimator.SetTrigger("HellTrigger");  // Use the trigger set in the Animator
+        Debug.Log("Sending soul to Hell");
     }
 
     // Reset or hide the riddle and soul if needed

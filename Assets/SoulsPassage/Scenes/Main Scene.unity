@@ -10029,7 +10029,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1495333848}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1585090062}
+        m_TargetAssemblyTypeName: SoulManager, Assembly-CSharp
+        m_MethodName: SendSoulToHell
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1495333848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10256,7 +10268,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1517142563
 Transform:
   m_ObjectHideFlags: 0
@@ -10282,7 +10294,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1517142562}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 8c72a4690ebe3404ebacc9cda04c9a18, type: 2}
   m_CullingMode: 0
@@ -10412,7 +10424,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1520555629}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1585090062}
+        m_TargetAssemblyTypeName: SoulManager, Assembly-CSharp
+        m_MethodName: SendSoulToHeaven
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1520555629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10999,6 +11023,14 @@ MonoBehaviour:
   riddles:
   - {fileID: 11400000, guid: 6eedc2de713aaf3409392677cd7bb8c0, type: 2}
   - {fileID: 11400000, guid: c175e0822de92a642bdf726d34f417b3, type: 2}
+  - {fileID: 11400000, guid: b1636b47001a50d4195c6e0ab51aac2f, type: 2}
+  - {fileID: 11400000, guid: 206492dc0e16ab644be41226e028f914, type: 2}
+  - {fileID: 11400000, guid: 575204523a038ed49aba67e8e1fc63ae, type: 2}
+  - {fileID: 11400000, guid: 84fb88a79a3ccc844a560f6c9e63cf78, type: 2}
+  - {fileID: 11400000, guid: 344d20ac4bc2e8a4aa9b6501f920eccf, type: 2}
+  - {fileID: 11400000, guid: 499aa3c05dd0c9549966c4dbe41cd756, type: 2}
+  - {fileID: 11400000, guid: f8ca837d927076d4b9032ccdddb33819, type: 2}
+  soulAnimator: {fileID: 1517142564}
 --- !u!4 &1585090063
 Transform:
   m_ObjectHideFlags: 0
