@@ -2671,7 +2671,7 @@ GameObject:
   - component: {fileID: 432965603}
   m_Layer: 0
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: GroundPlane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11452,6 +11452,24 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 344d20ac4bc2e8a4aa9b6501f920eccf, type: 2}
   - {fileID: 11400000, guid: 499aa3c05dd0c9549966c4dbe41cd756, type: 2}
   - {fileID: 11400000, guid: f8ca837d927076d4b9032ccdddb33819, type: 2}
+  - {fileID: 11400000, guid: e3d4dad3af742a140a6bdffb7ac9cf43, type: 2}
+  - {fileID: 11400000, guid: 108b8b7fc54580845bc4cc5fc3f9fc41, type: 2}
+  - {fileID: 11400000, guid: cba18419db4753740818d376c86b0ce5, type: 2}
+  - {fileID: 11400000, guid: ebf8c3654e8b8e64980f5e0c7f124858, type: 2}
+  - {fileID: 11400000, guid: 15659c9bc39e44144a1cb8c4085136ed, type: 2}
+  - {fileID: 11400000, guid: 496e0021faf073e47a00d2215183b1ed, type: 2}
+  - {fileID: 11400000, guid: 06531c91fdc621d4f804e10a9d152d7d, type: 2}
+  - {fileID: 11400000, guid: f3a769658e4cfe1439c41f4a2dea4e3c, type: 2}
+  - {fileID: 11400000, guid: b0fba431f1552c94db5cb985ef78c21a, type: 2}
+  - {fileID: 11400000, guid: 3dec46c48f4548b4f8712d2ec3bcbf89, type: 2}
+  - {fileID: 11400000, guid: 4e27fd7ea96b8e043929a296f0d329e5, type: 2}
+  - {fileID: 11400000, guid: 6a02ab9c4000f5e40aa04b4cb65b1ce2, type: 2}
+  - {fileID: 11400000, guid: 84bb2c0ba88c8a74690378c26e08a25c, type: 2}
+  - {fileID: 11400000, guid: d57ac2d2cdc54fc409b7f1b9ba6c5353, type: 2}
+  - {fileID: 11400000, guid: 019066a9427ff20439b3e53e59ba07ac, type: 2}
+  - {fileID: 11400000, guid: dc8247d34ea4be34b814537dda9eb6fb, type: 2}
+  - {fileID: 11400000, guid: c210875df5c3e67499201e858cfd4adf, type: 2}
+  - {fileID: 11400000, guid: 9347549768e90bd4180e1ddd32c24746, type: 2}
 --- !u!4 &1585090063
 Transform:
   m_ObjectHideFlags: 0
