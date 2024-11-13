@@ -6,6 +6,7 @@ TagManager:
   tags:
   - HeavenDoor
   - HellDoor
+  - Door
   layers:
   - Default
   - TransparentFX
