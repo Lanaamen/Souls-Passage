@@ -95,29 +95,31 @@ public class SoulThrow : MonoBehaviour
         isGoodSoul = isGood;
     }
 
-    // Handle interaction with doors to check and update the score
-    private void OnTriggerEnter(Collider other)
+private void OnTriggerEnter(Collider other)
+{
+    if (other.CompareTag("HellDoor") || other.CompareTag("HeavenDoor"))
     {
-        if (other.CompareTag("HellDoor") || other.CompareTag("HeavenDoor"))
+        bool correctDoor = (other.CompareTag("HellDoor") && !isGoodSoul) || 
+                           (other.CompareTag("HeavenDoor") && isGoodSoul);
+
+        if (correctDoor)
         {
-            bool correctDoor = (other.CompareTag("HellDoor") && !isGoodSoul) || 
-                               (other.CompareTag("HeavenDoor") && isGoodSoul);
-
-            if (correctDoor)
-            {
-                Debug.Log("Soul correctly sent to " + (isGoodSoul ? "Heaven." : "Hell."));
-                score++;
-                UpdateScoreText();
-            }
-            else
-            {
-                Debug.Log("Soul sent to the wrong place!");
-            }
-
-            // Hide the soul when it passes through the door
-            gameObject.SetActive(false);
+            Debug.Log("Soul correctly sent to " + (isGoodSoul ? "Heaven." : "Hell."));
+            score++; // Increase score for the correct door
+            UpdateScoreText();
         }
+        else
+        {
+            Debug.Log("Soul sent to the wrong place!");
+            score--; // Deduct score for the wrong door
+            UpdateScoreText();
+        }
+
+        // Hide the soul when it passes through the door
+        gameObject.SetActive(false);
     }
+}
+
 
     // Reset the soul and display a new riddle when the button is pressed
     public void OnButtonPress()
