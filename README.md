@@ -19,3 +19,9 @@ https://assetstore.unity.com/packages/3d/props/interior/picture-frames-with-phot
 
 video background
 https://picjumbo.com/
+
+portal sound
+https://pixabay.com/sound-effects/transitional-swipe-3-211685/
+
+AI Voice Samuel
+https://play.ht/studio

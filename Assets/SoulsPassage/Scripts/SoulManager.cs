@@ -10,6 +10,9 @@ public class SoulManager : MonoBehaviour
     [SerializeField] private Riddle[] riddles;  // Array of Riddle ScriptableObject references
     private int currentRiddleIndex = 0;  // Keeps track of which riddle to show
 
+    // Reference to SoulThrow to set the soul's status
+    public SoulThrow soulThrow;
+
     void Start()
     {
         // Shuffle the riddles at the start
@@ -40,6 +43,10 @@ public class SoulManager : MonoBehaviour
             // Ensure the soul is visible and riddle text is updated
             soul.SetActive(true);  // Activate the soul particle system
             riddleText.text = riddles[currentRiddleIndex].riddleText;  // Set riddle text
+
+            // Set the soul status (good or bad) based on the riddle
+            bool isGoodSoul = riddles[currentRiddleIndex].isGoodSoul;
+            soulThrow.SetSoulStatus(isGoodSoul);  // Set the soul status in the SoulThrow script
 
             // Optional debug to track progress
             Debug.Log("Showing riddle: " + riddles[currentRiddleIndex].riddleText);

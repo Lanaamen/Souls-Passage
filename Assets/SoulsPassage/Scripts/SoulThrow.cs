@@ -19,6 +19,11 @@ public class SoulThrow : MonoBehaviour
     // Reference to the SoulManager
     public SoulManager soulManager;
 
+    // Audio sources for correct and incorrect placements
+    public AudioSource correctPlacementAudio;
+    public AudioSource badSoulInHeavenAudio;
+    public AudioSource goodSoulInHellAudio;
+
     private void Start()
     {
         // Set initial score and timer text
@@ -95,31 +100,42 @@ public class SoulThrow : MonoBehaviour
         isGoodSoul = isGood;
     }
 
-private void OnTriggerEnter(Collider other)
-{
-    if (other.CompareTag("HellDoor") || other.CompareTag("HeavenDoor"))
+    // Handle interaction with doors to check and update the score
+    private void OnTriggerEnter(Collider other)
     {
-        bool correctDoor = (other.CompareTag("HellDoor") && !isGoodSoul) || 
-                           (other.CompareTag("HeavenDoor") && isGoodSoul);
-
-        if (correctDoor)
+        if (other.CompareTag("HellDoor") || other.CompareTag("HeavenDoor"))
         {
-            Debug.Log("Soul correctly sent to " + (isGoodSoul ? "Heaven." : "Hell."));
-            score++; // Increase score for the correct door
-            UpdateScoreText();
-        }
-        else
-        {
-            Debug.Log("Soul sent to the wrong place!");
-            score--; // Deduct score for the wrong door
-            UpdateScoreText();
-        }
+            bool correctDoor = (other.CompareTag("HellDoor") && !isGoodSoul) || 
+                               (other.CompareTag("HeavenDoor") && isGoodSoul);
 
-        // Hide the soul when it passes through the door
-        gameObject.SetActive(false);
+            if (correctDoor)
+            {
+                Debug.Log("Soul correctly sent to " + (isGoodSoul ? "Heaven." : "Hell."));
+                score++;
+                UpdateScoreText();
+                correctPlacementAudio.Play(); // Play correct placement sound
+            }
+            else
+            {
+                // Deduct a point for incorrect placement
+                Debug.Log("Soul sent to the wrong place!");
+                score--;  // Deduct 1 point for wrong placement
+                UpdateScoreText();
+
+                if (isGoodSoul && other.CompareTag("HellDoor"))
+                {
+                    goodSoulInHellAudio.Play(); // Play sound for good soul in hell
+                }
+                else if (!isGoodSoul && other.CompareTag("HeavenDoor"))
+                {
+                    badSoulInHeavenAudio.Play(); // Play sound for bad soul in heaven
+                }
+            }
+
+            // Hide the soul when it passes through the door
+            gameObject.SetActive(false);
+        }
     }
-}
-
 
     // Reset the soul and display a new riddle when the button is pressed
     public void OnButtonPress()
