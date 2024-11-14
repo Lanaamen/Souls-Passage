@@ -8,7 +8,8 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI scoreText;   // Text display for the score
     public int score = 0;               // Player's score
     private float timeRemaining = 60f;  // Countdown timer starting at 60 seconds
-    private bool isGameActive = true;   // Game state
+    private bool isGameActive = false;  // Game state - initially inactive
+    private bool isTimerRunning = false; // Timer status
 
     void Start()
     {
@@ -18,7 +19,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (isGameActive)
+        if (isGameActive && isTimerRunning)
         {
             if (timeRemaining > 0)
             {
@@ -32,6 +33,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Method to start the timer when the button is pressed
+    public void StartTimer()
+    {
+        isGameActive = true;  // Set the game as active
+        isTimerRunning = true; // Start the timer
+        timeRemaining = 60f;   // Reset the timer to 60 seconds
+        UpdateTimerText();     // Update the timer display immediately
+    }
+
+    // Method to add a point to the score
     public void AddPoint()
     {
         if (isGameActive)
@@ -41,19 +52,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Update the score display
     private void UpdateScoreText()
     {
         scoreText.text = "Score: " + score;
     }
 
+    // Update the timer display
     private void UpdateTimerText()
     {
         timerText.text = "Time: " + Mathf.Ceil(timeRemaining).ToString() + "s";
     }
 
+    // End the game when the timer reaches zero
     private void EndGame()
     {
-        isGameActive = false;
+        isTimerRunning = false;  // Stop the timer
+        isGameActive = false;    // End the game
         timerText.text = "Time's Up!";
         Debug.Log("Game Over! Final Score: " + score);
     }

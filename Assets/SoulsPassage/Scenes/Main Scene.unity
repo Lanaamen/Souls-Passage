@@ -3966,7 +3966,33 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 557724402}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1582009216}
+        m_TargetAssemblyTypeName: GrimGuideButtons, Assembly-CSharp
+        m_MethodName: OnButton2Pressed
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 973483772}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.XR.Interaction.Toolkit.XRBaseInteractor,
+            Unity.XR.Interaction.Toolkit
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1582009216}
+        m_TargetAssemblyTypeName: GrimGuideButtons, Assembly-CSharp
+        m_MethodName: OnButton2Pressed
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1799559287}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.XR.Interaction.Toolkit.XRBaseInteractor,
+            Unity.XR.Interaction.Toolkit
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &557724402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4179,9 +4205,9 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!1001 &584881400
@@ -5909,6 +5935,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1517142565}
         m_TargetAssemblyTypeName: SoulThrow, Assembly-CSharp
         m_MethodName: OnButtonPress
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1582009213}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: StartTimer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11006,7 +11044,33 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1495333848}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1582009216}
+        m_TargetAssemblyTypeName: GrimGuideButtons, Assembly-CSharp
+        m_MethodName: OnButton1Pressed
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 973483772}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.XR.Interaction.Toolkit.XRBaseInteractor,
+            Unity.XR.Interaction.Toolkit
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1582009216}
+        m_TargetAssemblyTypeName: GrimGuideButtons, Assembly-CSharp
+        m_MethodName: OnButton1Pressed
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1799559287}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.XR.Interaction.Toolkit.XRBaseInteractor,
+            Unity.XR.Interaction.Toolkit
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1495333848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11240,9 +11304,9 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!1001 &1512811593
@@ -17205,7 +17269,33 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2119121927}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1582009216}
+        m_TargetAssemblyTypeName: GrimGuideButtons, Assembly-CSharp
+        m_MethodName: OnButton3Pressed
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 973483772}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.XR.Interaction.Toolkit.XRBaseInteractor,
+            Unity.XR.Interaction.Toolkit
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1582009216}
+        m_TargetAssemblyTypeName: GrimGuideButtons, Assembly-CSharp
+        m_MethodName: OnButton3Pressed
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1799559287}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.XR.Interaction.Toolkit.XRBaseInteractor,
+            Unity.XR.Interaction.Toolkit
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2119121927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17418,9 +17508,9 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!1 &2126589200

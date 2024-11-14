@@ -23,17 +23,17 @@ public class GrimGuideButtons : MonoBehaviour
         button3.onSelectEntered.AddListener(OnButton3Pressed);
     }
 
-    private void OnButton1Pressed(XRBaseInteractor interactor)
+    public void OnButton1Pressed(XRBaseInteractor interactor)
     {
         PlaySound(buttonSound1);
     }
 
-    private void OnButton2Pressed(XRBaseInteractor interactor)
+    public void OnButton2Pressed(XRBaseInteractor interactor)
     {
         PlaySound(buttonSound2);
     }
 
-    private void OnButton3Pressed(XRBaseInteractor interactor)
+    public void OnButton3Pressed(XRBaseInteractor interactor)
     {
         PlaySound(buttonSound3);
     }
