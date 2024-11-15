@@ -1,13 +1,13 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class GrimGuideButton : MonoBehaviour
+public class GrimGuideButtons : MonoBehaviour
 {
     public AudioSource audioSource;
     public AudioClip buttonSound1;
     public AudioClip buttonSound2;
     public AudioClip buttonSound3;
-    public AudioClip buttonStopSound;  // Sound for the stop button (optional)
+
 
     public XRGrabInteractable button1;
     public XRGrabInteractable button2;

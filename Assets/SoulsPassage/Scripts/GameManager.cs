@@ -1,65 +1,111 @@
+using System.Collections;
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
 using TMPro;
+using UnityEngine.SceneManagement;
 
-public class GrimGuideButtons : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
-    public AudioSource audioSource; // Reference to the AudioSource component
-    public AudioClip buttonSound1; // Sound for the first button
-    public AudioClip buttonSound2; // Sound for the second button
-    public AudioClip buttonSound3; // Sound for the third button
+    public TextMeshProUGUI timerText;   // Text display for the timer
+    public TextMeshProUGUI scoreText;   // Text display for the score
+    public TextMeshProUGUI correctText; // Text display for correct answers
+    public TextMeshProUGUI wrongText;   // Text display for wrong answers
+    public int correctAnswers = 0;      // Player's correct answers
+    public int wrongAnswers = 0;        // Player's wrong answers
+    private int totalScore = 0;         // Player's total score
+    private float timeRemaining = 60f;  // Countdown timer starting at 60 seconds
+    private bool isGameActive = false;  // Game state - initially inactive
+    private bool isTimerRunning = false; // Timer status
 
-    // Reference to the XRButton Interactable components
-    public XRGrabInteractable button1;
-    public XRGrabInteractable button2;
-    public XRGrabInteractable button3;
-    public XRGrabInteractable stopButton; // New button to stop all sounds
-
-    private void Start()
+    void Start()
     {
-        // Add listeners for button presses
-        button1.onSelectEntered.AddListener(OnButton1Pressed);
-        button2.onSelectEntered.AddListener(OnButton2Pressed);
-        button3.onSelectEntered.AddListener(OnButton3Pressed);
-        stopButton.onSelectEntered.AddListener(OnStopButtonPressed); // Add listener for the stop button
+        UpdateScoreText();
+        UpdateTimerText();
     }
 
-    public void OnButton1Pressed(XRBaseInteractor interactor)
+    void Update()
     {
-        PlaySound(buttonSound1);
-    }
-
-    public void OnButton2Pressed(XRBaseInteractor interactor)
-    {
-        PlaySound(buttonSound2);
-    }
-
-    public void OnButton3Pressed(XRBaseInteractor interactor)
-    {
-        PlaySound(buttonSound3);
-    }
-
-    public void OnStopButtonPressed(XRBaseInteractor interactor)
-    {
-        StopAllSounds();
-    }
-
-    // Play the appropriate sound when a button is pressed
-    private void PlaySound(AudioClip sound)
-    {
-        if (audioSource != null && sound != null)
+        if (isGameActive && isTimerRunning)
         {
-            audioSource.clip = sound;
-            audioSource.Play();
+            if (timeRemaining > 0)
+            {
+                timeRemaining -= Time.deltaTime;
+                UpdateTimerText();
+            }
+            else
+            {
+                EndGame();
+            }
         }
     }
 
-    // Stop all sounds currently playing
-    private void StopAllSounds()
+    // Method to start the timer when the button is pressed
+    public void StartTimer()
     {
-        if (audioSource != null)
+        isGameActive = true;  // Set the game as active
+        isTimerRunning = true; // Start the timer
+        timeRemaining = 60f;   // Reset the timer to 60 seconds
+        UpdateTimerText();     // Update the timer display immediately
+    }
+
+    // Method to add a point for a correct answer
+    public void AddCorrectAnswer()
+    {
+        if (isGameActive)
         {
-            audioSource.Stop();
+            correctAnswers++;
+            UpdateScoreText();
         }
+    }
+
+    // Method to add a point for a wrong answer
+    public void AddWrongAnswer()
+    {
+        if (isGameActive)
+        {
+            wrongAnswers++;
+            UpdateScoreText();
+        }
+    }
+
+    // Update the score display
+    private void UpdateScoreText()
+    {
+        totalScore = correctAnswers - wrongAnswers;
+        scoreText.text = "Total Score: " + totalScore;
+        correctText.text = "Correct: " + correctAnswers;
+        wrongText.text = "Wrong: " + wrongAnswers;
+    }
+
+    // Update the timer display
+    private void UpdateTimerText()
+    {
+        timerText.text = "Time: " + Mathf.Ceil(timeRemaining).ToString() + "s";
+    }
+
+    // End the game when the timer reaches zero
+    private void EndGame()
+    {
+        isTimerRunning = false;  // Stop the timer
+        isGameActive = false;    // End the game
+        timerText.text = "Time's Up!";
+        Debug.Log("Game Over! Final Score: " + totalScore);
+    }
+
+    public void QuitGame()
+    {
+        #if UNITY_EDITOR
+        // If running in the Unity Editor, stop playing
+        UnityEditor.EditorApplication.isPlaying = false;
+        #else
+        // If running as a standalone build, close the application
+        Application.Quit();
+        #endif
+    }
+
+    // This method will restart the game by reloading the current scene
+    public void RestartGame()
+    {
+        // Get the current active scene and reload it
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
