@@ -1,94 +1,65 @@
-using System.Collections;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 using TMPro;
-using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GrimGuideButtons : MonoBehaviour
 {
-    public TextMeshProUGUI timerText;   // Text display for the timer
-    public TextMeshProUGUI scoreText;   // Text display for the score
-    public int score = 0;               // Player's score
-    private float timeRemaining = 60f;  // Countdown timer starting at 60 seconds
-    private bool isGameActive = false;  // Game state - initially inactive
-    private bool isTimerRunning = false; // Timer status
+    public AudioSource audioSource; // Reference to the AudioSource component
+    public AudioClip buttonSound1; // Sound for the first button
+    public AudioClip buttonSound2; // Sound for the second button
+    public AudioClip buttonSound3; // Sound for the third button
 
-    void Start()
+    // Reference to the XRButton Interactable components
+    public XRGrabInteractable button1;
+    public XRGrabInteractable button2;
+    public XRGrabInteractable button3;
+    public XRGrabInteractable stopButton; // New button to stop all sounds
+
+    private void Start()
     {
-        UpdateScoreText();
-        UpdateTimerText();
+        // Add listeners for button presses
+        button1.onSelectEntered.AddListener(OnButton1Pressed);
+        button2.onSelectEntered.AddListener(OnButton2Pressed);
+        button3.onSelectEntered.AddListener(OnButton3Pressed);
+        stopButton.onSelectEntered.AddListener(OnStopButtonPressed); // Add listener for the stop button
     }
 
-    void Update()
+    public void OnButton1Pressed(XRBaseInteractor interactor)
     {
-        if (isGameActive && isTimerRunning)
+        PlaySound(buttonSound1);
+    }
+
+    public void OnButton2Pressed(XRBaseInteractor interactor)
+    {
+        PlaySound(buttonSound2);
+    }
+
+    public void OnButton3Pressed(XRBaseInteractor interactor)
+    {
+        PlaySound(buttonSound3);
+    }
+
+    public void OnStopButtonPressed(XRBaseInteractor interactor)
+    {
+        StopAllSounds();
+    }
+
+    // Play the appropriate sound when a button is pressed
+    private void PlaySound(AudioClip sound)
+    {
+        if (audioSource != null && sound != null)
         {
-            if (timeRemaining > 0)
-            {
-                timeRemaining -= Time.deltaTime;
-                UpdateTimerText();
-            }
-            else
-            {
-                EndGame();
-            }
+            audioSource.clip = sound;
+            audioSource.Play();
         }
     }
 
-    // Method to start the timer when the button is pressed
-    public void StartTimer()
+    // Stop all sounds currently playing
+    private void StopAllSounds()
     {
-        isGameActive = true;  // Set the game as active
-        isTimerRunning = true; // Start the timer
-        timeRemaining = 60f;   // Reset the timer to 60 seconds
-        UpdateTimerText();     // Update the timer display immediately
-    }
-
-    // Method to add a point to the score
-    public void AddPoint()
-    {
-        if (isGameActive)
+        if (audioSource != null)
         {
-            score++;
-            UpdateScoreText();
+            audioSource.Stop();
         }
-    }
-
-    // Update the score display
-    private void UpdateScoreText()
-    {
-        scoreText.text = "Score: " + score;
-    }
-
-    // Update the timer display
-    private void UpdateTimerText()
-    {
-        timerText.text = "Time: " + Mathf.Ceil(timeRemaining).ToString() + "s";
-    }
-
-    // End the game when the timer reaches zero
-    private void EndGame()
-    {
-        isTimerRunning = false;  // Stop the timer
-        isGameActive = false;    // End the game
-        timerText.text = "Time's Up!";
-        Debug.Log("Game Over! Final Score: " + score);
-    }
-
-        public void QuitGame()
-    {
-        #if UNITY_EDITOR
-        // If running in the Unity Editor, stop playing
-        UnityEditor.EditorApplication.isPlaying = false;
-        #else
-        // If running as a standalone build, close the application
-        Application.Quit();
-        #endif
-    }
-
-    // This method will restart the game by reloading the current scene
-    public void RestartGame()
-    {
-        // Get the current active scene and reload it
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
