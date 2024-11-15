@@ -27,6 +27,7 @@ public class SoulThrow : MonoBehaviour
     public AudioSource correctPlacementAudio;
     public AudioSource badSoulInHeavenAudio;
     public AudioSource goodSoulInHellAudio;
+    public AudioSource missedThrowAudio; // New audio source for missed throws
 
     private void Start()
     {
@@ -119,47 +120,56 @@ public class SoulThrow : MonoBehaviour
         isGoodSoul = isGood;
     }
 
-    // Handle interaction with doors to check and update the score
-    private void OnTriggerEnter(Collider other)
+    // Attach a second collider (trigger) to detect missing the doors
+private void OnTriggerEnter(Collider other)
+{
+    // Check if it hits the "missed" collider
+    if (other.CompareTag("MissedCollider"))
     {
-        if (other.CompareTag("HellDoor") || other.CompareTag("HeavenDoor"))
-        {
-            bool correctDoor = (other.CompareTag("HellDoor") && !isGoodSoul) || 
-                               (other.CompareTag("HeavenDoor") && isGoodSoul);
-
-            if (correctDoor)
-            {
-                Debug.Log("Soul correctly sent to " + (isGoodSoul ? "Heaven." : "Hell."));
-                correctAnswers++;  // Increment correct answers
-                UpdateCorrectText(); // Update correct answers text
-                score++;  // Add point for correct placement
-                UpdateScoreText(); // Update total score
-                correctPlacementAudio.Play(); // Play correct placement sound
-            }
-            else
-            {
-                // Increment wrong answers and show the wrong answer text
-                Debug.Log("Soul sent to the wrong place!");
-                wrongAnswers++;  // Increment wrong answers
-                UpdateWrongText(); // Update wrong answers text
-                score--;  // Deduct point for wrong placement
-                UpdateScoreText(); // Update total score
-
-                // Play specific sound for bad placement
-                if (isGoodSoul && other.CompareTag("HellDoor"))
-                {
-                    goodSoulInHellAudio.Play(); // Play sound for good soul in hell
-                }
-                else if (!isGoodSoul && other.CompareTag("HeavenDoor"))
-                {
-                    badSoulInHeavenAudio.Play(); // Play sound for bad soul in heaven
-                }
-            }
-
-            // Hide the soul when it passes through the door
-            gameObject.SetActive(false);
-        }
+        missedThrowAudio.Play(); // Play the missed throw sound
+        Debug.Log("The soul has left the premises, it's gone...");
     }
+
+    // Check if it hits the Hell or Heaven door
+    if (other.CompareTag("HellDoor") || other.CompareTag("HeavenDoor"))
+    {
+        bool correctDoor = (other.CompareTag("HellDoor") && !isGoodSoul) || 
+                           (other.CompareTag("HeavenDoor") && isGoodSoul);
+
+        if (correctDoor)
+        {
+            Debug.Log("Soul correctly sent to " + (isGoodSoul ? "Heaven." : "Hell."));
+            correctAnswers++;  // Increment correct answers
+            UpdateCorrectText(); // Update correct answers text
+            score++;  // Add point for correct placement
+            UpdateScoreText(); // Update total score
+            correctPlacementAudio.Play(); // Play correct placement sound
+        }
+        else
+        {
+            // Increment wrong answers and show the wrong answer text
+            Debug.Log("Soul sent to the wrong place!");
+            wrongAnswers++;  // Increment wrong answers
+            UpdateWrongText(); // Update wrong answers text
+            score--;  // Deduct point for wrong placement
+            UpdateScoreText(); // Update total score
+
+            // Play specific sound for bad placement
+            if (isGoodSoul && other.CompareTag("HellDoor"))
+            {
+                goodSoulInHellAudio.Play(); // Play sound for good soul in hell
+            }
+            else if (!isGoodSoul && other.CompareTag("HeavenDoor"))
+            {
+                badSoulInHeavenAudio.Play(); // Play sound for bad soul in heaven
+            }
+        }
+
+        // Hide the soul when it passes through the door
+        gameObject.SetActive(false);
+    }
+}
+
 
     // Reset the soul and display a new riddle when the button is pressed
     public void OnButtonPress()

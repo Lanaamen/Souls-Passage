@@ -3,16 +3,17 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class GrimGuideButtons : MonoBehaviour
 {
-    public AudioSource audioSource;
+    public AudioSource audioSource; // General audio source for button sounds
     public AudioClip buttonSound1;
     public AudioClip buttonSound2;
     public AudioClip buttonSound3;
-
 
     public XRGrabInteractable button1;
     public XRGrabInteractable button2;
     public XRGrabInteractable button3;
     public XRGrabInteractable stopButton;  // New button to stop all sounds
+
+    public AudioSource introAudioSource;  // AudioSource for the intro sound
 
     private void Start()
     {
@@ -48,18 +49,23 @@ public class GrimGuideButtons : MonoBehaviour
         }
     }
 
-    // Stop all sounds when the stop button is pressed
+    // Stop all sounds, including the intro sound, when the stop button is pressed
     public void OnStopButtonPressed(XRBaseInteractor interactor)
     {
         StopAllSounds();
     }
 
-    // Stop the audio from playing
+    // Stop the audio from playing, including the intro sound
     private void StopAllSounds()
     {
         if (audioSource != null)
         {
             audioSource.Stop();
+        }
+
+        if (introAudioSource != null)
+        {
+            introAudioSource.Stop();  // Stop the intro sound as well
         }
     }
 }
