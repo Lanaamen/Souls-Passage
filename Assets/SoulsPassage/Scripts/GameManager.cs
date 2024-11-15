@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -71,5 +72,23 @@ public class GameManager : MonoBehaviour
         isGameActive = false;    // End the game
         timerText.text = "Time's Up!";
         Debug.Log("Game Over! Final Score: " + score);
+    }
+
+        public void QuitGame()
+    {
+        #if UNITY_EDITOR
+        // If running in the Unity Editor, stop playing
+        UnityEditor.EditorApplication.isPlaying = false;
+        #else
+        // If running as a standalone build, close the application
+        Application.Quit();
+        #endif
+    }
+
+    // This method will restart the game by reloading the current scene
+    public void RestartGame()
+    {
+        // Get the current active scene and reload it
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
