@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public TextMeshProUGUI timerText;   // Text display for the timer
-    public TextMeshProUGUI scoreText;   // Text display for the score
+    public TextMeshProUGUI scoreText;   // Text display for the total score
     public TextMeshProUGUI correctText; // Text display for correct answers
     public TextMeshProUGUI wrongText;   // Text display for wrong answers
     public int correctAnswers = 0;      // Player's correct answers
@@ -52,8 +52,8 @@ public class GameManager : MonoBehaviour
     {
         if (isGameActive)
         {
-            correctAnswers++;
-            UpdateScoreText();
+            correctAnswers++;      // Increment correct answers
+            UpdateScoreText();     // Update the score display
         }
     }
 
@@ -62,18 +62,18 @@ public class GameManager : MonoBehaviour
     {
         if (isGameActive)
         {
-            wrongAnswers++;
-            UpdateScoreText();
+            wrongAnswers++;        // Increment wrong answers
+            UpdateScoreText();     // Update the score display
         }
     }
 
     // Update the score display
     private void UpdateScoreText()
     {
-        totalScore = correctAnswers - wrongAnswers;
+        totalScore = correctAnswers - wrongAnswers; // Total score is the correct minus wrong answers
         scoreText.text = "Total Score: " + totalScore;
-        correctText.text = "Correct: " + correctAnswers;
-        wrongText.text = "Wrong: " + wrongAnswers;
+        correctText.text = "Correct: " + correctAnswers; // Display correct answers
+        wrongText.text = "Wrong: " + wrongAnswers;       // Display wrong answers
     }
 
     // Update the timer display

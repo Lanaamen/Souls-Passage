@@ -12035,8 +12035,9 @@ MonoBehaviour:
   grabInteractable: {fileID: 1517142566}
   soulRigidbody: {fileID: 1517142567}
   scoreText: {fileID: 1740579085}
+  correctText: {fileID: 151376651}
+  wrongText: {fileID: 1502635315}
   timerText: {fileID: 1642119401}
-  score: 0
   timer: 60
   soulManager: {fileID: 1585090062}
   correctPlacementAudio: {fileID: 1585090064}

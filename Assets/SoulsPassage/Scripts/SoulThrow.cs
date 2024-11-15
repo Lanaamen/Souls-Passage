@@ -8,9 +8,13 @@ public class SoulThrow : MonoBehaviour
 {
     public XRGrabInteractable grabInteractable; // Reference to the XRGrabInteractable
     public Rigidbody soulRigidbody; // The Rigidbody attached to the soul (the parent object)
-    public TMP_Text scoreText; // Text to display the score
+    public TMP_Text scoreText; // Text to display the total score
+    public TMP_Text correctText; // Text to display the correct answers
+    public TMP_Text wrongText; // Text to display the wrong answers
     public TMP_Text timerText; // Text to display the timer
-    public int score = 0; // The player's score
+    private int score = 0; // The player's total score (correct - wrong)
+    private int correctAnswers = 0; // Correct answers count
+    private int wrongAnswers = 0; // Wrong answers count
     public float timer = 60f; // 60 seconds countdown timer
     private Vector3 initialPosition = new Vector3(-0.3337124f, 1.596273f, -6.39f); // Store initial position of the soul
     private bool isBeingHeld = false;
@@ -28,6 +32,8 @@ public class SoulThrow : MonoBehaviour
     {
         // Set initial score and timer text
         UpdateScoreText();
+        UpdateCorrectText();
+        UpdateWrongText();
         UpdateTimerText();
         // Initialize position and physics settings for the soul
         ResetSoulPosition();
@@ -72,10 +78,23 @@ public class SoulThrow : MonoBehaviour
         }
     }
 
-    // Updates the score text display
+    // Updates the total score text display
     private void UpdateScoreText()
     {
+        score = correctAnswers - wrongAnswers; // Total score is correct answers - wrong answers
         scoreText.text = "Score: " + score;
+    }
+
+    // Updates the correct answers text display
+    private void UpdateCorrectText()
+    {
+        correctText.text = "Correct: " + correctAnswers;
+    }
+
+    // Updates the wrong answers text display
+    private void UpdateWrongText()
+    {
+        wrongText.text = "Wrong: " + wrongAnswers;
     }
 
     // Updates the timer text display
@@ -111,17 +130,22 @@ public class SoulThrow : MonoBehaviour
             if (correctDoor)
             {
                 Debug.Log("Soul correctly sent to " + (isGoodSoul ? "Heaven." : "Hell."));
-                score++;
-                UpdateScoreText();
+                correctAnswers++;  // Increment correct answers
+                UpdateCorrectText(); // Update correct answers text
+                score++;  // Add point for correct placement
+                UpdateScoreText(); // Update total score
                 correctPlacementAudio.Play(); // Play correct placement sound
             }
             else
             {
-                // Deduct a point for incorrect placement
+                // Increment wrong answers and show the wrong answer text
                 Debug.Log("Soul sent to the wrong place!");
-                score--;  // Deduct 1 point for wrong placement
-                UpdateScoreText();
+                wrongAnswers++;  // Increment wrong answers
+                UpdateWrongText(); // Update wrong answers text
+                score--;  // Deduct point for wrong placement
+                UpdateScoreText(); // Update total score
 
+                // Play specific sound for bad placement
                 if (isGoodSoul && other.CompareTag("HellDoor"))
                 {
                     goodSoulInHellAudio.Play(); // Play sound for good soul in hell
