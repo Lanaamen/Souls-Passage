@@ -19,6 +19,7 @@ public class SoulThrow : MonoBehaviour
     private Vector3 initialPosition = new Vector3(-0.3337124f, 1.596273f, -6.39f); // Store initial position of the soul
     private bool isBeingHeld = false;
     private bool isGoodSoul; // To track if the soul is good or bad
+    private bool hasMissed = false; // Flag to ensure only one deduction per missed throw
 
     // Reference to the SoulManager
     public SoulManager soulManager;
@@ -121,60 +122,73 @@ public class SoulThrow : MonoBehaviour
     }
 
     // Attach a second collider (trigger) to detect missing the doors
-private void OnTriggerEnter(Collider other)
-{
-    // Check if it hits the "missed" collider
-    if (other.CompareTag("MissedCollider"))
+    private void OnTriggerEnter(Collider other)
     {
-        missedThrowAudio.Play(); // Play the missed throw sound
-        Debug.Log("The soul has left the premises, it's gone...");
-    }
-
-    // Check if it hits the Hell or Heaven door
-    if (other.CompareTag("HellDoor") || other.CompareTag("HeavenDoor"))
-    {
-        bool correctDoor = (other.CompareTag("HellDoor") && !isGoodSoul) || 
-                           (other.CompareTag("HeavenDoor") && isGoodSoul);
-
-        if (correctDoor)
+        // Check if it hits the "missed" collider
+        if (other.CompareTag("MissedCollider") && !hasMissed)
         {
-            Debug.Log("Soul correctly sent to " + (isGoodSoul ? "Heaven." : "Hell."));
-            correctAnswers++;  // Increment correct answers
-            UpdateCorrectText(); // Update correct answers text
-            score++;  // Add point for correct placement
-            UpdateScoreText(); // Update total score
-            correctPlacementAudio.Play(); // Play correct placement sound
-        }
-        else
-        {
-            // Increment wrong answers and show the wrong answer text
-            Debug.Log("Soul sent to the wrong place!");
-            wrongAnswers++;  // Increment wrong answers
-            UpdateWrongText(); // Update wrong answers text
-            score--;  // Deduct point for wrong placement
-            UpdateScoreText(); // Update total score
+            hasMissed = true; // Set the flag to prevent multiple deductions
+            timer -= 10f; // Deduct 10 seconds
+            if (timer < 0) timer = 0; // Ensure the timer doesn't go negative
+            UpdateTimerText(); // Update the timer display
+            missedThrowAudio.Play(); // Play the missed throw sound
+            Debug.Log("The soul has left the premises, it's gone... -10 seconds deducted");
 
-            // Play specific sound for bad placement
-            if (isGoodSoul && other.CompareTag("HellDoor"))
-            {
-                goodSoulInHellAudio.Play(); // Play sound for good soul in hell
-            }
-            else if (!isGoodSoul && other.CompareTag("HeavenDoor"))
-            {
-                badSoulInHeavenAudio.Play(); // Play sound for bad soul in heaven
-            }
+            // Reset the flag after a short delay to allow new misses
+            StartCoroutine(ResetMissedFlag());
         }
 
-        // Hide the soul when it passes through the door
-        gameObject.SetActive(false);
-    }
-}
+        // Check if it hits the Hell or Heaven door
+        if (other.CompareTag("HellDoor") || other.CompareTag("HeavenDoor"))
+        {
+            bool correctDoor = (other.CompareTag("HellDoor") && !isGoodSoul) || 
+                               (other.CompareTag("HeavenDoor") && isGoodSoul);
 
+            if (correctDoor)
+            {
+                Debug.Log("Soul correctly sent to " + (isGoodSoul ? "Heaven." : "Hell."));
+                correctAnswers++;  // Increment correct answers
+                UpdateCorrectText(); // Update correct answers text
+                score++;  // Add point for correct placement
+                UpdateScoreText(); // Update total score
+                correctPlacementAudio.Play(); // Play correct placement sound
+            }
+            else
+            {
+                // Increment wrong answers and show the wrong answer text
+                Debug.Log("Soul sent to the wrong place!");
+                wrongAnswers++;  // Increment wrong answers
+                UpdateWrongText(); // Update wrong answers text
+                score--;  // Deduct point for wrong placement
+                UpdateScoreText(); // Update total score
+
+                // Play specific sound for bad placement
+                if (isGoodSoul && other.CompareTag("HellDoor"))
+                {
+                    goodSoulInHellAudio.Play(); // Play sound for good soul in hell
+                }
+                else if (!isGoodSoul && other.CompareTag("HeavenDoor"))
+                {
+                    badSoulInHeavenAudio.Play(); // Play sound for bad soul in heaven
+                }
+            }
+
+            // Hide the soul when it passes through the door
+            gameObject.SetActive(false);
+        }
+    }
 
     // Reset the soul and display a new riddle when the button is pressed
     public void OnButtonPress()
     {
         ResetSoulPosition(); // Reset the soul's position to its initial state
         soulManager.ShowRiddleAndSoul(); // Call the SoulManager to display the new riddle and soul
+    }
+
+    // Coroutine to reset the missed flag
+    private IEnumerator ResetMissedFlag()
+    {
+        yield return new WaitForSeconds(0.5f); // Adjust delay as needed
+        hasMissed = false; // Reset the flag for new detections
     }
 }
