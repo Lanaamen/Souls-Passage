@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine;
 using TMPro;
@@ -29,17 +30,6 @@ public class SoulThrow : MonoBehaviour
     public AudioSource goodSoulInHellAudio;
     public AudioSource missedThrowAudio; // New audio source for missed throws
 
-    // Game Over UI Elements
-    public GameObject gameOverPanel;  // The panel that will show the game over screen
-    public TMP_Text gameOverText;     // The text to display game over message
-
-    // Win UI Elements
-    public GameObject winPanel;  // The panel that will show the win screen
-    public TMP_Text winText;     // The text to display win message
-    
-    private bool gameOver = false;    // Flag to check if game is over
-    private bool gameWon = false;     // Flag to check if the player has won
-
     private void Start()
     {
         // Set initial score and timer text
@@ -50,16 +40,10 @@ public class SoulThrow : MonoBehaviour
         // Initialize position and physics settings for the soul
         ResetSoulPosition();
         soulRigidbody.isKinematic = true; // Prevent gravity when being held
-
-        // Hide the Game Over and Win screens initially
-        gameOverPanel.SetActive(false);
-        winPanel.SetActive(false);
     }
 
     private void Update()
     {
-        if (gameOver || gameWon) return; // If game is over or won, skip the update
-
         HandleTimer();
 
         if (grabInteractable.isSelected)
@@ -78,12 +62,9 @@ public class SoulThrow : MonoBehaviour
             soulRigidbody.AddForce(throwDirection * 10f, ForceMode.Impulse); // Apply throw force
             isBeingHeld = false;
         }
-
-        // Check if the game is over or won
-        CheckGameOver();
-        CheckGameWon();
     }
 
+    // Method to handle the timer countdown
     private void HandleTimer()
     {
         if (timer > 0)
@@ -96,40 +77,7 @@ public class SoulThrow : MonoBehaviour
         {
             timer = 0;
             Debug.Log("Time's up!");
-            CheckGameOver(); // Check if the game is over when the time runs out
         }
-    }
-
-    private void CheckGameOver()
-    {
-        if (timer <= 0 && (correctAnswers < 15 || wrongAnswers > 2))
-        {
-            TriggerGameOver("You failed to guide enough souls to their rightful place... \nBetter luck next time!");
-        }
-    }
-
-    private void CheckGameWon()
-    {
-        if (correctAnswers >= 15 && wrongAnswers <= 2 && timer > 0 && !gameWon)
-        {
-            TriggerWin("Congratulations! You have successfully guided enough souls back to their rightful place!");
-        }
-    }
-
-    // Trigger the Game Over screen
-    private void TriggerGameOver(string message)
-    {
-        gameOver = true;  // Set the gameOver flag to true
-        gameOverText.text = message;  // Set the game over text
-        gameOverPanel.SetActive(true);  // Show the game over panel
-    }
-
-    // Trigger the Win screen
-    private void TriggerWin(string message)
-    {
-        gameWon = true;  // Set the gameWon flag to true
-        winText.text = message;  // Set the win message
-        winPanel.SetActive(true);  // Show the win panel
     }
 
     // Updates the total score text display
@@ -225,13 +173,22 @@ public class SoulThrow : MonoBehaviour
                 }
             }
 
-            ResetSoulPosition(); // Reset the soul's position
+            // Hide the soul when it passes through the door
+            gameObject.SetActive(false);
         }
     }
 
+    // Reset the soul and display a new riddle when the button is pressed
+    public void OnButtonPress()
+    {
+        ResetSoulPosition(); // Reset the soul's position to its initial state
+        soulManager.ShowRiddleAndSoul(); // Call the SoulManager to display the new riddle and soul
+    }
+
+    // Coroutine to reset the missed flag
     private IEnumerator ResetMissedFlag()
     {
-        yield return new WaitForSeconds(1f); // Wait for 1 second
-        hasMissed = false;  // Reset the missed flag
+        yield return new WaitForSeconds(0.5f); // Adjust delay as needed
+        hasMissed = false; // Reset the flag for new detections
     }
 }
