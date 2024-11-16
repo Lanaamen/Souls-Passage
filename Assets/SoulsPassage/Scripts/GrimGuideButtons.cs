@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
+using TMPro;  // Import TMP for handling text UI
 
 public class GrimGuideButtons : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class GrimGuideButtons : MonoBehaviour
 
     public AudioSource introAudioSource;  // AudioSource for the intro sound
 
+    public TextAsset textFile; // Reference to the text file
+    public TextMeshProUGUI displayText; // Text UI component to display text
+
     private void Start()
     {
         // Add listeners for button presses
@@ -26,17 +30,40 @@ public class GrimGuideButtons : MonoBehaviour
 
     public void OnButton1Pressed(XRBaseInteractor interactor)
     {
+        // Play sound and display the corresponding text
         PlaySound(buttonSound1);
+        DisplayTextFromFile("Text1");
     }
 
     public void OnButton2Pressed(XRBaseInteractor interactor)
     {
+        // Play sound and display the corresponding text
         PlaySound(buttonSound2);
+        DisplayTextFromFile("Text2");
     }
 
     public void OnButton3Pressed(XRBaseInteractor interactor)
     {
+        // Play sound and display the corresponding text
         PlaySound(buttonSound3);
+        DisplayTextFromFile("Text3");
+    }
+
+    private void DisplayTextFromFile(string key)
+    {
+        if (textFile != null && displayText != null)
+        {
+            // Find the corresponding text for the key in the text file
+            string[] lines = textFile.text.Split('\n');
+            foreach (string line in lines)
+            {
+                if (line.StartsWith(key))
+                {
+                    displayText.text = line.Substring(key.Length + 1); // +1 to remove the key and the space
+                    break;
+                }
+            }
+        }
     }
 
     // Play the appropriate sound when a button is pressed

@@ -71,8 +71,8 @@ public class GameManager : MonoBehaviour
     private void UpdateScoreText()
     {
         totalScore = correctAnswers - wrongAnswers; // Total score is the correct minus wrong answers
-        scoreText.text = "Total Score: " + totalScore;
-        correctText.text = "Correct: " + correctAnswers; // Display correct answers
+        scoreText.text = "Score: " + totalScore;
+        correctText.text = "Right: " + correctAnswers; // Display correct answers
         wrongText.text = "Wrong: " + wrongAnswers;       // Display wrong answers
     }
 
