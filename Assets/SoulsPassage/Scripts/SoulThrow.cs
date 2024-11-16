@@ -1,70 +1,82 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class SoulThrow : MonoBehaviour
 {
-    public XRGrabInteractable grabInteractable; // Reference to the XRGrabInteractable
-    public Rigidbody soulRigidbody; // The Rigidbody attached to the soul (the parent object)
-    public TMP_Text scoreText; // Text to display the total score
-    public TMP_Text correctText; // Text to display the correct answers
-    public TMP_Text wrongText; // Text to display the wrong answers
-    public TMP_Text timerText; // Text to display the timer
-    private int score = 0; // The player's total score (correct - wrong)
-    private int correctAnswers = 0; // Correct answers count
-    private int wrongAnswers = 0; // Wrong answers count
-    public float timer = 60f; // 60 seconds countdown timer
-    private Vector3 initialPosition = new Vector3(-0.3337124f, 1.596273f, -6.39f); // Store initial position of the soul
+    public XRGrabInteractable grabInteractable;
+    public Rigidbody soulRigidbody;
+    public TMP_Text scoreText;
+    public TMP_Text correctText;
+    public TMP_Text wrongText;
+    public TMP_Text timerText;
+    private int score = 0;
+    private int correctAnswers = 0;
+    private int wrongAnswers = 0;
+    public float timer = 60f;
+    private Vector3 initialPosition = new Vector3(-0.3337124f, 1.596273f, -6.39f);
     private bool isBeingHeld = false;
-    private bool isGoodSoul; // To track if the soul is good or bad
-    private bool hasMissed = false; // Flag to ensure only one deduction per missed throw
+    private bool isGoodSoul;
+    private bool hasMissed = false;
 
-    // Reference to the SoulManager
     public SoulManager soulManager;
-
-    // Audio sources for correct and incorrect placements
     public AudioSource correctPlacementAudio;
     public AudioSource badSoulInHeavenAudio;
     public AudioSource goodSoulInHellAudio;
-    public AudioSource missedThrowAudio; // New audio source for missed throws
+    public AudioSource missedThrowAudio;
+
+    public GameObject gameOverPanel;
+    public GameObject winPanel;
+    public TMP_Text gameOverText;
+    public TMP_Text winText;
+
+    public GameObject gameOverRestartButton;
+    public GameObject gameOverQuitButton;
+    public GameObject winRestartButton;
+    public GameObject winQuitButton;
+
+    private bool gameOverTriggered = false;
+    private bool winTriggered = false;
 
     private void Start()
     {
-        // Set initial score and timer text
         UpdateScoreText();
         UpdateCorrectText();
         UpdateWrongText();
         UpdateTimerText();
-        // Initialize position and physics settings for the soul
         ResetSoulPosition();
-        soulRigidbody.isKinematic = true; // Prevent gravity when being held
+        soulRigidbody.isKinematic = true;
+
+        gameOverPanel.SetActive(false);
+        winPanel.SetActive(false);
     }
 
     private void Update()
     {
+        if (gameOverTriggered || winTriggered) return;
+
         HandleTimer();
+        CheckGameOverConditions();
+        CheckWinConditions();
 
         if (grabInteractable.isSelected)
         {
-            // When grabbed, make the object follow the hand, but disable physics interaction
             isBeingHeld = true;
-            soulRigidbody.isKinematic = true; // Keep it kinematic while being held
+            soulRigidbody.isKinematic = true;
             transform.position = grabInteractable.transform.position;
             transform.rotation = grabInteractable.transform.rotation;
         }
         else if (isBeingHeld)
         {
-            // After release, apply force to throw the soul
-            soulRigidbody.isKinematic = false; // Let physics control it again
-            Vector3 throwDirection = grabInteractable.transform.forward; // Direction the soul is thrown
-            soulRigidbody.AddForce(throwDirection * 10f, ForceMode.Impulse); // Apply throw force
+            soulRigidbody.isKinematic = false;
+            Vector3 throwDirection = grabInteractable.transform.forward;
+            soulRigidbody.AddForce(throwDirection * 10f, ForceMode.Impulse);
             isBeingHeld = false;
         }
     }
 
-    // Method to handle the timer countdown
     private void HandleTimer()
     {
         if (timer > 0)
@@ -76,69 +88,59 @@ public class SoulThrow : MonoBehaviour
         if (timer <= 0)
         {
             timer = 0;
-            Debug.Log("Time's up!");
+            Debug.Log("Timer expired!");
         }
     }
 
-    // Updates the total score text display
     private void UpdateScoreText()
     {
-        score = correctAnswers - wrongAnswers; // Total score is correct answers - wrong answers
+        score = correctAnswers - wrongAnswers;
         scoreText.text = "Score: " + score;
     }
 
-    // Updates the correct answers text display
     private void UpdateCorrectText()
     {
         correctText.text = "Correct: " + correctAnswers;
     }
 
-    // Updates the wrong answers text display
     private void UpdateWrongText()
     {
         wrongText.text = "Wrong: " + wrongAnswers;
     }
 
-    // Updates the timer text display
     private void UpdateTimerText()
     {
         timerText.text = "Time: " + Mathf.CeilToInt(timer).ToString();
     }
 
-    // Reset the soul to its initial position
     public void ResetSoulPosition()
     {
-        transform.position = initialPosition; // Reset to the initial position
+        transform.position = initialPosition;
         soulRigidbody.isKinematic = true;
-        soulRigidbody.velocity = Vector3.zero; // Stop any motion
-        soulRigidbody.angularVelocity = Vector3.zero; // Stop any rotation
-        gameObject.SetActive(true); // Ensure the soul is visible
+        soulRigidbody.velocity = Vector3.zero;
+        soulRigidbody.angularVelocity = Vector3.zero;
+        gameObject.SetActive(true);
     }
 
-    // Set the soul's good/bad status from the SoulManager
     public void SetSoulStatus(bool isGood)
     {
         isGoodSoul = isGood;
     }
 
-    // Attach a second collider (trigger) to detect missing the doors
     private void OnTriggerEnter(Collider other)
     {
-        // Check if it hits the "missed" collider
         if (other.CompareTag("MissedCollider") && !hasMissed)
         {
-            hasMissed = true; // Set the flag to prevent multiple deductions
-            timer -= 6f; // Deduct 6 seconds
-            if (timer < 0) timer = 0; // Ensure the timer doesn't go negative
-            UpdateTimerText(); // Update the timer display
-            missedThrowAudio.Play(); // Play the missed throw sound
-            Debug.Log("The soul has left the premises, it's gone... -10 seconds deducted");
+            hasMissed = true;
+            timer -= 6f;
+            if (timer < 0) timer = 0;
+            UpdateTimerText();
+            missedThrowAudio.Play();
+            Debug.Log("Missed throw -6 seconds deducted.");
 
-            // Reset the flag after a short delay to allow new misses
             StartCoroutine(ResetMissedFlag());
         }
 
-        // Check if it hits the Hell or Heaven door
         if (other.CompareTag("HellDoor") || other.CompareTag("HeavenDoor"))
         {
             bool correctDoor = (other.CompareTag("HellDoor") && !isGoodSoul) || 
@@ -146,49 +148,107 @@ public class SoulThrow : MonoBehaviour
 
             if (correctDoor)
             {
-                Debug.Log("Soul correctly sent to " + (isGoodSoul ? "Heaven." : "Hell."));
-                correctAnswers++;  // Increment correct answers
-                UpdateCorrectText(); // Update correct answers text
-                score++;  // Add point for correct placement
-                UpdateScoreText(); // Update total score
-                correctPlacementAudio.Play(); // Play correct placement sound
+                Debug.Log("Correct placement.");
+                correctAnswers++;
+                UpdateCorrectText();
+                correctPlacementAudio.Play();
             }
             else
             {
-                // Increment wrong answers and show the wrong answer text
-                Debug.Log("Soul sent to the wrong place!");
-                wrongAnswers++;  // Increment wrong answers
-                UpdateWrongText(); // Update wrong answers text
-                score--;  // Deduct point for wrong placement
-                UpdateScoreText(); // Update total score
+                Debug.Log("Incorrect placement.");
+                wrongAnswers++;
+                UpdateWrongText();
 
-                // Play specific sound for bad placement
                 if (isGoodSoul && other.CompareTag("HellDoor"))
                 {
-                    goodSoulInHellAudio.Play(); // Play sound for good soul in hell
+                    goodSoulInHellAudio.Play();
                 }
                 else if (!isGoodSoul && other.CompareTag("HeavenDoor"))
                 {
-                    badSoulInHeavenAudio.Play(); // Play sound for bad soul in heaven
+                    badSoulInHeavenAudio.Play();
                 }
             }
 
-            // Hide the soul when it passes through the door
             gameObject.SetActive(false);
         }
     }
 
-    // Reset the soul and display a new riddle when the button is pressed
     public void OnButtonPress()
     {
-        ResetSoulPosition(); // Reset the soul's position to its initial state
-        soulManager.ShowRiddleAndSoul(); // Call the SoulManager to display the new riddle and soul
+        ResetSoulPosition();
+        soulManager.ShowRiddleAndSoul();
     }
 
-    // Coroutine to reset the missed flag
+    private void CheckGameOverConditions()
+    {
+        if (wrongAnswers > 2 || (timer <= 0 && correctAnswers < 15))
+        {
+            Debug.Log("Game Over triggered.");
+            if (!gameOverTriggered)
+            {
+                TriggerGameOver();
+                gameOverTriggered = true;
+            }
+        }
+    }
+
+    private void CheckWinConditions()
+    {
+        if (correctAnswers >= 15 && wrongAnswers <= 2)
+        {
+            Debug.Log("Win triggered.");
+            if (!winTriggered)
+            {
+                TriggerWin();
+                winTriggered = true;
+            }
+        }
+    }
+
+    private void TriggerGameOver()
+    {
+        gameOverPanel.SetActive(true);
+        gameOverText.text = "Game Over!";
+        grabInteractable.enabled = false;
+        soulRigidbody.isKinematic = true;
+    }
+
+    private void TriggerWin()
+    {
+        winPanel.SetActive(true);
+        winText.text = "You Win!";
+        grabInteractable.enabled = false;
+        soulRigidbody.isKinematic = true;
+    }
+
+    public void RestartGame()
+    {
+        wrongAnswers = 0;
+        correctAnswers = 0;
+        score = 0;
+        timer = 60f;
+        UpdateScoreText();
+        UpdateCorrectText();
+        UpdateWrongText();
+        UpdateTimerText();
+
+        gameOverPanel.SetActive(false);
+        winPanel.SetActive(false);
+        ResetSoulPosition();
+
+        gameOverTriggered = false;
+        winTriggered = false;
+    }
+
+    public void QuitGame()
+    {
+        Debug.Log("Quitting game...");
+        Application.Quit();
+    }
+
     private IEnumerator ResetMissedFlag()
     {
-        yield return new WaitForSeconds(0.5f); // Adjust delay as needed
-        hasMissed = false; // Reset the flag for new detections
+        yield return new WaitForSeconds(1f);
+        hasMissed = false;
     }
 }
