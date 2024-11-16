@@ -39,6 +39,8 @@ public class SoulThrow : MonoBehaviour
 
     private bool gameOverTriggered = false;
     private bool winTriggered = false;
+    private bool gameActive = true; // Default to true for gameplay
+
 
     private void Start()
     {
@@ -173,11 +175,20 @@ public class SoulThrow : MonoBehaviour
         }
     }
 
-    public void OnButtonPress()
+   public void OnButtonPress()
+{
+    // Prevent summoning a new soul if the game has ended
+    if (!gameActive)
     {
-        ResetSoulPosition();
-        soulManager.ShowRiddleAndSoul();
+        Debug.Log("Cannot summon souls: The game is not active.");
+        return;
     }
+
+    ResetSoulPosition(); // Reset the soul's position to its initial state
+    soulManager.ShowRiddleAndSoul(); // Call the SoulManager to display the new riddle and soul
+    Debug.Log("New soul summoned!");
+}
+
 
     private void CheckGameOverConditions()
     {
