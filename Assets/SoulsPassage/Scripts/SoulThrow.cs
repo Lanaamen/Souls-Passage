@@ -27,6 +27,10 @@ public class SoulThrow : MonoBehaviour
     public AudioSource goodSoulInHellAudio;
     public AudioSource missedThrowAudio;
 
+    public AudioSource gameOverAudio; // Audio for game over
+    public AudioSource winAudio; // Audio for winning
+
+
     public GameObject gameOverPanel;
     public GameObject winPanel;
     public TMP_Text gameOverText;
@@ -216,21 +220,43 @@ public class SoulThrow : MonoBehaviour
         }
     }
 
-    private void TriggerGameOver()
-    {
-        gameOverPanel.SetActive(true);
-        gameOverText.text = "Game Over!";
-        grabInteractable.enabled = false;
-        soulRigidbody.isKinematic = true;
-    }
+ private void TriggerGameOver()
+{
+    StopAllSounds(); // Stop any currently playing sounds
+    gameOverPanel.SetActive(true);
+    gameOverText.text = "Game Over!";
+    grabInteractable.enabled = false;
+    soulRigidbody.isKinematic = true;
 
-    private void TriggerWin()
+    if (gameOverAudio != null) // Play game-over sound
     {
-        winPanel.SetActive(true);
-        winText.text = "You Win!";
-        grabInteractable.enabled = false;
-        soulRigidbody.isKinematic = true;
+        gameOverAudio.Play();
     }
+}
+
+private void TriggerWin()
+{
+    StopAllSounds(); // Stop any currently playing sounds
+    winPanel.SetActive(true);
+    winText.text = "You Win!";
+    grabInteractable.enabled = false;
+    soulRigidbody.isKinematic = true;
+
+    if (winAudio != null) // Play win sound
+    {
+        winAudio.Play();
+    }
+}
+
+// Helper method to stop all currently playing sounds
+private void StopAllSounds()
+{
+    if (correctPlacementAudio != null) correctPlacementAudio.Stop();
+    if (badSoulInHeavenAudio != null) badSoulInHeavenAudio.Stop();
+    if (goodSoulInHellAudio != null) goodSoulInHellAudio.Stop();
+    if (missedThrowAudio != null) missedThrowAudio.Stop();
+}
+
 
     public void RestartGame()
     {
