@@ -4,7 +4,11 @@ using TMPro;  // Import TMP for handling text UI
 
 public class GrimGuideButtons : MonoBehaviour
 {
-    public AudioSource audioSource; // General audio source for button sounds
+    // Individual audio sources for each button
+    public AudioSource audioSource1;
+    public AudioSource audioSource2;
+    public AudioSource audioSource3;
+
     public AudioClip buttonSound1;
     public AudioClip buttonSound2;
     public AudioClip buttonSound3;
@@ -31,21 +35,21 @@ public class GrimGuideButtons : MonoBehaviour
     public void OnButton1Pressed(XRBaseInteractor interactor)
     {
         // Play sound and display the corresponding text
-        PlaySound(buttonSound1);
+        PlaySound(audioSource1, buttonSound1);
         DisplayTextFromFile("Text1");
     }
 
     public void OnButton2Pressed(XRBaseInteractor interactor)
     {
         // Play sound and display the corresponding text
-        PlaySound(buttonSound2);
+        PlaySound(audioSource2, buttonSound2);
         DisplayTextFromFile("Text2");
     }
 
     public void OnButton3Pressed(XRBaseInteractor interactor)
     {
         // Play sound and display the corresponding text
-        PlaySound(buttonSound3);
+        PlaySound(audioSource3, buttonSound3);
         DisplayTextFromFile("Text3");
     }
 
@@ -66,13 +70,13 @@ public class GrimGuideButtons : MonoBehaviour
         }
     }
 
-    // Play the appropriate sound when a button is pressed
-    private void PlaySound(AudioClip sound)
+    // Play the appropriate sound using a specific audio source
+    private void PlaySound(AudioSource source, AudioClip sound)
     {
-        if (audioSource != null && sound != null)
+        if (source != null && sound != null)
         {
-            audioSource.clip = sound;
-            audioSource.Play();
+            source.clip = sound;
+            source.Play();
         }
     }
 
@@ -85,9 +89,19 @@ public class GrimGuideButtons : MonoBehaviour
     // Stop the audio from playing, including the intro sound
     private void StopAllSounds()
     {
-        if (audioSource != null)
+        if (audioSource1 != null)
         {
-            audioSource.Stop();
+            audioSource1.Stop();
+        }
+
+        if (audioSource2 != null)
+        {
+            audioSource2.Stop();
+        }
+
+        if (audioSource3 != null)
+        {
+            audioSource3.Stop();
         }
 
         if (introAudioSource != null)
