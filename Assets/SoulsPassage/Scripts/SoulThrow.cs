@@ -241,7 +241,7 @@ public class SoulThrow : MonoBehaviour
         soulRigidbody.isKinematic = true;
     }
 
-    private void StopAllSounds()
+    public void StopAllSounds()
     {
         StopSound(correctPlacementAudio);
         StopSound(badSoulInHeavenAudio);

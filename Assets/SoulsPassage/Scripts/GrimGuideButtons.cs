@@ -4,7 +4,6 @@ using TMPro;
 
 public class GrimGuideButtons : MonoBehaviour
 {
-    // Individual audio sources for each button
     public AudioSource audioSource1;
     public AudioSource audioSource2;
     public AudioSource audioSource3;
@@ -16,26 +15,31 @@ public class GrimGuideButtons : MonoBehaviour
     public XRGrabInteractable button1;
     public XRGrabInteractable button2;
     public XRGrabInteractable button3;
-    public XRGrabInteractable stopButton;  // New button to stop all sounds
+    public XRGrabInteractable stopButton;
 
-    public AudioSource introAudioSource;  // AudioSource for the intro sound
+    public AudioSource introAudioSource;
 
-    // Background music
-    public AudioSource backgroundAudioSource; // New AudioSource for background sound
-    public AudioClip backgroundMusic; // Background sound clip
+    public AudioSource backgroundAudioSource;
+    public AudioClip backgroundMusic;
 
-    public TextAsset textFile; // Reference to the text file
-    public TextMeshProUGUI displayText; // Text UI component to display text
+    public TextAsset textFile;
+    public TextMeshProUGUI displayText;
+
+    public SoulThrow soulThrowScript;
+
+    private SoulManager soulManager; // Reference to SoulManager to access its audio sources
 
     private void Start()
     {
-        PlayBackgroundMusic(); // Start background music
+        // Get the SoulManager component
+        soulManager = FindObjectOfType<SoulManager>(); // This assumes you have only one instance of SoulManager in the scene
 
-        // Attach listeners to button events
+        PlayBackgroundMusic();
+
         button1.onSelectEntered.AddListener(OnButton1Pressed);
         button2.onSelectEntered.AddListener(OnButton2Pressed);
         button3.onSelectEntered.AddListener(OnButton3Pressed);
-        stopButton.onSelectEntered.AddListener(OnStopButtonPressed);  // Listen for stop button press
+        stopButton.onSelectEntered.AddListener(OnStopButtonPressed);
     }
 
     public void OnButton1Pressed(XRBaseInteractor interactor)
@@ -76,7 +80,7 @@ public class GrimGuideButtons : MonoBehaviour
     {
         if (source != null && sound != null)
         {
-            StopAllSoundsExcept(source); // Ensure only one sound plays
+            StopAllSoundsExcept(source);
             source.clip = sound;
             source.Play();
         }
@@ -84,30 +88,36 @@ public class GrimGuideButtons : MonoBehaviour
 
     private void StopAllSoundsExcept(AudioSource exceptionSource)
     {
-        // Stop all sounds except the one specified
-        foreach (AudioSource source in GetComponents<AudioSource>())
+        // Stop all sounds except the one specified and exceptions
+        foreach (AudioSource source in FindObjectsOfType<AudioSource>())
         {
-            if (source != exceptionSource && source.isPlaying)
+            // Skip background, bookpage, and soul wosh sounds
+            if (source != exceptionSource && source != backgroundAudioSource && 
+                source != soulManager.soulWooshAudioSource && source != soulManager.bookPageAudioSource)
             {
-                source.Stop();
+                if (source.isPlaying)
+                {
+                    source.Stop();
+                }
             }
         }
 
-        // Also stop introAudioSource if it's not the exception
-        if (introAudioSource != exceptionSource && introAudioSource != null && introAudioSource.isPlaying)
+        // Ensure the background music is never stopped by this function
+        if (backgroundAudioSource != null && backgroundAudioSource.isPlaying && backgroundAudioSource != exceptionSource)
         {
-            introAudioSource.Stop();
+            backgroundAudioSource.Play();
         }
     }
 
     public void OnStopButtonPressed(XRBaseInteractor interactor)
     {
         StopAllSounds();
+        soulThrowScript.StopAllSounds();  // Stop all audio in SoulThrow
     }
 
     private void StopAllSounds()
     {
-        foreach (AudioSource source in GetComponents<AudioSource>())
+        foreach (AudioSource source in FindObjectsOfType<AudioSource>())
         {
             if (source.isPlaying)
             {
@@ -121,7 +131,7 @@ public class GrimGuideButtons : MonoBehaviour
         if (backgroundAudioSource != null && backgroundMusic != null)
         {
             backgroundAudioSource.clip = backgroundMusic;
-            backgroundAudioSource.loop = true;  // Ensure background music loops
+            backgroundAudioSource.loop = true;
             backgroundAudioSource.Play();
         }
     }
