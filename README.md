@@ -35,5 +35,8 @@ https://pixabay.com/sound-effects/page-turn02-103822/
 New soul audio
 https://pixabay.com/sound-effects/whoosh-fire-movement-243099/
 
+UI-click sound
+https://pixabay.com/sound-effects/ui-click-43196/
+
 Font
 https://ggbot.itch.io/unutterable-font/download/eyJpZCI6MTcwODg1OSwiZXhwaXJlcyI6MTczMTc0NzMxMX0%3d.crSRf6nLeC8kpsJb%2biZV9Bu%2bcMs%3d
