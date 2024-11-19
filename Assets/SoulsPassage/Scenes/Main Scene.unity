@@ -1916,7 +1916,6 @@ GameObject:
   - component: {fileID: 206137320}
   - component: {fileID: 206137319}
   - component: {fileID: 206137322}
-  - component: {fileID: 206137323}
   m_Layer: 5
   m_Name: BookCanvas
   m_TagString: Untagged
@@ -2034,21 +2033,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RaycastTriggerInteraction: 1
---- !u!114 &206137323
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 206137317}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45899c69af1606748996fd7a3ae288e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hoverAudioSource: {fileID: 1071483395}
-  hoverSoundClip: {fileID: 8300000, guid: a62903bfaecb64946a8468c41d336ee8, type: 3}
-  interactables: []
 --- !u!1 &212193586 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 109434732395284509, guid: 65847589f926b734d9eaed6e25f0046b, type: 3}
@@ -5897,9 +5881,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0.8396226, g: 0.8198202, b: 0.8198202, a: 1}
-    m_HighlightedColor: {r: 0.26415092, g: 0.033641864, b: 0.033641864, a: 1}
-    m_PressedColor: {r: 0.2627451, g: 0.03529412, b: 0.03529412, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.4811321, g: 0.12482201, b: 0.12482201, a: 1}
+    m_PressedColor: {r: 0.48235297, g: 0.1254902, b: 0.1254902, a: 1}
+    m_SelectedColor: {r: 0.48235297, g: 0.1254902, b: 0.1254902, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -8606,9 +8590,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0.8396226, g: 0.8198202, b: 0.8198202, a: 1}
-    m_HighlightedColor: {r: 0.26415092, g: 0.033641864, b: 0.033641864, a: 1}
-    m_PressedColor: {r: 0.2627451, g: 0.03529412, b: 0.03529412, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.4811321, g: 0.12482201, b: 0.12482201, a: 1}
+    m_PressedColor: {r: 0.48235297, g: 0.1254902, b: 0.1254902, a: 1}
+    m_SelectedColor: {r: 0.48235297, g: 0.1254902, b: 0.1254902, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -16604,9 +16588,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0.8396226, g: 0.8198202, b: 0.8198202, a: 1}
-    m_HighlightedColor: {r: 0.26415092, g: 0.033641864, b: 0.033641864, a: 1}
-    m_PressedColor: {r: 0.2627451, g: 0.03529412, b: 0.03529412, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.4811321, g: 0.12482201, b: 0.12482201, a: 1}
+    m_PressedColor: {r: 0.48235297, g: 0.1254902, b: 0.1254902, a: 1}
+    m_SelectedColor: {r: 0.48235297, g: 0.1254902, b: 0.1254902, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -17452,9 +17436,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0.8396226, g: 0.8198202, b: 0.8198202, a: 1}
-    m_HighlightedColor: {r: 0.26415092, g: 0.033641864, b: 0.033641864, a: 1}
-    m_PressedColor: {r: 0.2627451, g: 0.03529412, b: 0.03529412, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.4811321, g: 0.12482201, b: 0.12482201, a: 1}
+    m_PressedColor: {r: 0.48235297, g: 0.1254902, b: 0.1254902, a: 1}
+    m_SelectedColor: {r: 0.48235297, g: 0.1254902, b: 0.1254902, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -18203,6 +18187,7 @@ GameObject:
   - component: {fileID: 1582009214}
   - component: {fileID: 1582009216}
   - component: {fileID: 1582009217}
+  - component: {fileID: 1582009218}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -18271,6 +18256,25 @@ MonoBehaviour:
   wrongText: {fileID: 1502635315}
   correctAnswers: 0
   wrongAnswers: 0
+  gameOverScreen: {fileID: 807962235}
+  winScreen: {fileID: 521669729}
+  buttonsCanvasGroup: {fileID: 0}
+  winningScore: 15
+--- !u!114 &1582009218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1582009212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef95dbc575e3cef4a8fbc692b9c4388c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonCanvasGroup: {fileID: 0}
+  gameOverCanvasGroup: {fileID: 0}
+  winCanvasGroup: {fileID: 0}
 --- !u!1 &1585090061
 GameObject:
   m_ObjectHideFlags: 0
@@ -21311,9 +21315,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0.8396226, g: 0.8198202, b: 0.8198202, a: 1}
-    m_HighlightedColor: {r: 0.26415092, g: 0.033641864, b: 0.033641864, a: 1}
-    m_PressedColor: {r: 0.2627451, g: 0.03529412, b: 0.03529412, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.4811321, g: 0.12482201, b: 0.12482201, a: 1}
+    m_PressedColor: {r: 0.48235297, g: 0.1254902, b: 0.1254902, a: 1}
+    m_SelectedColor: {r: 0.48235297, g: 0.1254902, b: 0.1254902, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -24815,9 +24819,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0.8396226, g: 0.8198202, b: 0.8198202, a: 1}
-    m_HighlightedColor: {r: 0.26415092, g: 0.033641864, b: 0.033641864, a: 1}
-    m_PressedColor: {r: 0.2627451, g: 0.03529412, b: 0.03529412, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.4811321, g: 0.12482201, b: 0.12482201, a: 1}
+    m_PressedColor: {r: 0.48235297, g: 0.1254902, b: 0.1254902, a: 1}
+    m_SelectedColor: {r: 0.48235297, g: 0.1254902, b: 0.1254902, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -25567,9 +25571,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0.8396226, g: 0.8198202, b: 0.8198202, a: 1}
-    m_HighlightedColor: {r: 0.26415092, g: 0.033641864, b: 0.033641864, a: 1}
-    m_PressedColor: {r: 0.2627451, g: 0.03529412, b: 0.03529412, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.4811321, g: 0.12482201, b: 0.12482201, a: 1}
+    m_PressedColor: {r: 0.48235297, g: 0.1254902, b: 0.1254902, a: 1}
+    m_SelectedColor: {r: 0.48235297, g: 0.1254902, b: 0.1254902, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
