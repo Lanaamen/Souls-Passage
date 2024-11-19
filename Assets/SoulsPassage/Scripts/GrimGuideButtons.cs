@@ -82,20 +82,43 @@ public class GrimGuideButtons : MonoBehaviour
     {
         if (source != null && sound != null)
         {
-            // Stoppa introljudet om det spelas
+            // Stoppa intro-ljudet om det spelas
             if (introAudioSource != null && introAudioSource.isPlaying)
             {
                 introAudioSource.Stop();
             }
 
-            // Stoppa det eventuella ljudet som redan spelas innan vi spelar ett nytt ljud
-            if (source.isPlaying)
-            {
-                source.Stop();
-            }
+            // Stoppa eventuella andra ljud som redan spelas
+            StopOtherSounds(source);
 
             source.clip = sound;
             source.Play();
+        }
+    }
+
+    // Stoppa alla ljud som inte är bakgrundsljudet, inklusive intro-ljudet
+    private void StopOtherSounds(AudioSource currentSource)
+    {
+        // Kontrollera och stoppa alla andra ljud än det nuvarande ljudet
+        if (audioSource1 != currentSource && audioSource1.isPlaying)
+        {
+            audioSource1.Stop();
+        }
+
+        if (audioSource2 != currentSource && audioSource2.isPlaying)
+        {
+            audioSource2.Stop();
+        }
+
+        if (audioSource3 != currentSource && audioSource3.isPlaying)
+        {
+            audioSource3.Stop();
+        }
+
+        // Stoppa intro-ljudet om det inte är det ljudet som ska spelas
+        if (introAudioSource != currentSource && introAudioSource.isPlaying)
+        {
+            introAudioSource.Stop();
         }
     }
 
