@@ -115,16 +115,18 @@ public class GrimGuideButtons : MonoBehaviour
         soulThrowScript.StopAllSounds();  // Stop all audio in SoulThrow
     }
 
-    private void StopAllSounds()
+ private void StopAllSounds()
+{
+    foreach (AudioSource source in FindObjectsOfType<AudioSource>())
     {
-        foreach (AudioSource source in FindObjectsOfType<AudioSource>())
+        // Skip stopping the background audio source
+        if (source != backgroundAudioSource && source.isPlaying)
         {
-            if (source.isPlaying)
-            {
-                source.Stop();
-            }
+            source.Stop();
         }
     }
+}
+
 
     private void PlayBackgroundMusic()
     {
