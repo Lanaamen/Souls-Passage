@@ -13,6 +13,12 @@ public class SoulManager : MonoBehaviour
     // Reference to SoulThrow to set the soul's status
     public SoulThrow soulThrow;
 
+    // Audio sources for sounds
+    public AudioSource bookPageAudioSource;  // Audio source for the book page sound
+    public AudioSource soulWooshAudioSource; // Audio source for the soul woosh sound
+    public AudioClip bookPageSound;          // Audio clip for book page turning
+    public AudioClip soulWooshSound;         // Audio clip for soul woosh
+
     void Start()
     {
         // Shuffle the riddles at the start
@@ -48,6 +54,9 @@ public class SoulManager : MonoBehaviour
             bool isGoodSoul = riddles[currentRiddleIndex].isGoodSoul;
             soulThrow.SetSoulStatus(isGoodSoul);  // Set the soul status in the SoulThrow script
 
+            // Play sounds simultaneously
+            PlaySounds();
+
             // Optional debug to track progress
             Debug.Log("Showing riddle: " + riddles[currentRiddleIndex].riddleText);
 
@@ -66,5 +75,21 @@ public class SoulManager : MonoBehaviour
         currentRiddleIndex = 0;
         soul.SetActive(false);  // Hide the soul
         riddleText.text = "";   // Clear the riddle text
+    }
+
+    // Play the book page sound and soul woosh sound simultaneously
+    private void PlaySounds()
+    {
+        if (bookPageAudioSource != null && bookPageSound != null)
+        {
+            bookPageAudioSource.clip = bookPageSound;
+            bookPageAudioSource.Play();
+        }
+
+        if (soulWooshAudioSource != null && soulWooshSound != null)
+        {
+            soulWooshAudioSource.clip = soulWooshSound;
+            soulWooshAudioSource.Play();
+        }
     }
 }

@@ -29,7 +29,7 @@ public class SoulThrow : MonoBehaviour
 
     public AudioSource gameOverAudio; // Audio for game over
     public AudioSource winAudio; // Audio for winning
-
+    public AudioSource backgroundAudio; // Optional background sound
 
     public GameObject gameOverPanel;
     public GameObject winPanel;
@@ -45,7 +45,6 @@ public class SoulThrow : MonoBehaviour
     private bool winTriggered = false;
     private bool gameActive = true; // Default to true for gameplay
 
-
     private void Start()
     {
         UpdateScoreText();
@@ -57,6 +56,12 @@ public class SoulThrow : MonoBehaviour
 
         gameOverPanel.SetActive(false);
         winPanel.SetActive(false);
+
+        if (backgroundAudio != null && !backgroundAudio.isPlaying)
+        {
+            backgroundAudio.loop = true; // Ensure looping
+            backgroundAudio.Play(); // Start background music
+        }
     }
 
     private void Update()
@@ -141,7 +146,7 @@ public class SoulThrow : MonoBehaviour
             timer -= 6f;
             if (timer < 0) timer = 0;
             UpdateTimerText();
-            missedThrowAudio.Play();
+            PlaySound(missedThrowAudio);
             Debug.Log("Missed throw -6 seconds deducted.");
 
             StartCoroutine(ResetMissedFlag());
@@ -157,7 +162,7 @@ public class SoulThrow : MonoBehaviour
                 Debug.Log("Correct placement.");
                 correctAnswers++;
                 UpdateCorrectText();
-                correctPlacementAudio.Play();
+                PlaySound(correctPlacementAudio);
             }
             else
             {
@@ -167,11 +172,11 @@ public class SoulThrow : MonoBehaviour
 
                 if (isGoodSoul && other.CompareTag("HellDoor"))
                 {
-                    goodSoulInHellAudio.Play();
+                    PlaySound(goodSoulInHellAudio);
                 }
                 else if (!isGoodSoul && other.CompareTag("HeavenDoor"))
                 {
-                    badSoulInHeavenAudio.Play();
+                    PlaySound(badSoulInHeavenAudio);
                 }
             }
 
@@ -179,26 +184,23 @@ public class SoulThrow : MonoBehaviour
         }
     }
 
-   public void OnButtonPress()
-{
-    // Prevent summoning a new soul if the game has ended
-    if (!gameActive)
+    public void OnButtonPress()
     {
-        Debug.Log("Cannot summon souls: The game is not active.");
-        return;
+        if (!gameActive)
+        {
+            Debug.Log("Cannot summon souls: The game is not active.");
+            return;
+        }
+
+        ResetSoulPosition();
+        soulManager.ShowRiddleAndSoul();
+        Debug.Log("New soul summoned!");
     }
-
-    ResetSoulPosition(); // Reset the soul's position to its initial state
-    soulManager.ShowRiddleAndSoul(); // Call the SoulManager to display the new riddle and soul
-    Debug.Log("New soul summoned!");
-}
-
 
     private void CheckGameOverConditions()
     {
         if (wrongAnswers > 2 || (timer <= 0 && correctAnswers < 15))
         {
-            Debug.Log("Game Over triggered.");
             if (!gameOverTriggered)
             {
                 TriggerGameOver();
@@ -211,7 +213,6 @@ public class SoulThrow : MonoBehaviour
     {
         if (correctAnswers >= 15 && wrongAnswers <= 2)
         {
-            Debug.Log("Win triggered.");
             if (!winTriggered)
             {
                 TriggerWin();
@@ -220,43 +221,52 @@ public class SoulThrow : MonoBehaviour
         }
     }
 
- private void TriggerGameOver()
-{
-    StopAllSounds(); // Stop any currently playing sounds
-    gameOverPanel.SetActive(true);
-    gameOverText.text = "Game Over!";
-    grabInteractable.enabled = false;
-    soulRigidbody.isKinematic = true;
-
-    if (gameOverAudio != null) // Play game-over sound
+    private void TriggerGameOver()
     {
-        gameOverAudio.Play();
+        StopAllSounds();
+        PlaySound(gameOverAudio);
+        gameOverPanel.SetActive(true);
+        gameOverText.text = "Game Over!";
+        grabInteractable.enabled = false;
+        soulRigidbody.isKinematic = true;
     }
-}
 
-private void TriggerWin()
-{
-    StopAllSounds(); // Stop any currently playing sounds
-    winPanel.SetActive(true);
-    winText.text = "You Win!";
-    grabInteractable.enabled = false;
-    soulRigidbody.isKinematic = true;
-
-    if (winAudio != null) // Play win sound
+    private void TriggerWin()
     {
-        winAudio.Play();
+        StopAllSounds();
+        PlaySound(winAudio);
+        winPanel.SetActive(true);
+        winText.text = "You Win!";
+        grabInteractable.enabled = false;
+        soulRigidbody.isKinematic = true;
     }
-}
 
-// Helper method to stop all currently playing sounds
-private void StopAllSounds()
-{
-    if (correctPlacementAudio != null) correctPlacementAudio.Stop();
-    if (badSoulInHeavenAudio != null) badSoulInHeavenAudio.Stop();
-    if (goodSoulInHellAudio != null) goodSoulInHellAudio.Stop();
-    if (missedThrowAudio != null) missedThrowAudio.Stop();
-}
+    private void StopAllSounds()
+    {
+        StopSound(correctPlacementAudio);
+        StopSound(badSoulInHeavenAudio);
+        StopSound(goodSoulInHellAudio);
+        StopSound(missedThrowAudio);
+        StopSound(gameOverAudio);
+        StopSound(winAudio);
+    }
 
+    private void PlaySound(AudioSource audioSource)
+    {
+        if (audioSource != null)
+        {
+            StopSound(audioSource);
+            audioSource.Play();
+        }
+    }
+
+    private void StopSound(AudioSource audioSource)
+    {
+        if (audioSource != null && audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
+    }
 
     public void RestartGame()
     {
