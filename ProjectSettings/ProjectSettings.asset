@@ -161,7 +161,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.DefaultCompany.LanaimeanSoulsPassage
+    Android: com.DefaultCompany.Lanaimean.SoulsPassage
     Standalone: com.DefaultCompany.Storytelling
   buildNumber:
     Standalone: 0

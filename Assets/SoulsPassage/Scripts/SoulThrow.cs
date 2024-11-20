@@ -41,6 +41,8 @@ public class SoulThrow : MonoBehaviour
     public GameObject winRestartButton;
     public GameObject winQuitButton;
 
+    public GameObject bookCanvas; // Reference to the book canvas to deactivate
+
     private bool gameOverTriggered = false;
     private bool winTriggered = false;
     private bool gameActive = true; // Default to true for gameplay
@@ -226,9 +228,13 @@ public class SoulThrow : MonoBehaviour
         StopAllSounds();
         PlaySound(gameOverAudio);
         gameOverPanel.SetActive(true);
-        gameOverText.text = "Game Over!";
         grabInteractable.enabled = false;
         soulRigidbody.isKinematic = true;
+
+        if (bookCanvas != null)
+        {
+            bookCanvas.SetActive(false); // Disable the book canvas
+        }
     }
 
     private void TriggerWin()
@@ -236,9 +242,13 @@ public class SoulThrow : MonoBehaviour
         StopAllSounds();
         PlaySound(winAudio);
         winPanel.SetActive(true);
-        winText.text = "You Win!";
         grabInteractable.enabled = false;
         soulRigidbody.isKinematic = true;
+
+        if (bookCanvas != null)
+        {
+            bookCanvas.SetActive(false); // Disable the book canvas
+        }
     }
 
     public void StopAllSounds()
@@ -285,6 +295,11 @@ public class SoulThrow : MonoBehaviour
 
         gameOverTriggered = false;
         winTriggered = false;
+
+        if (bookCanvas != null)
+        {
+            bookCanvas.SetActive(true); // Re-enable the book canvas
+        }
     }
 
     public void QuitGame()
