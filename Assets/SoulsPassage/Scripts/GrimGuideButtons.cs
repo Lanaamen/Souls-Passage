@@ -18,7 +18,6 @@ public class GrimGuideButtons : MonoBehaviour
     public XRGrabInteractable stopButton;
 
     public AudioSource introAudioSource;
-
     public AudioSource backgroundAudioSource;
     public AudioClip backgroundMusic;
 
@@ -26,7 +25,6 @@ public class GrimGuideButtons : MonoBehaviour
     public TextMeshProUGUI displayText;
 
     public SoulThrow soulThrowScript;
-
     private SoulManager soulManager; // Reference to SoulManager to access its audio sources
 
     public bool isFirstSoulSummoned = false; // Flag to track if the first soul is summoned
@@ -44,6 +42,8 @@ public class GrimGuideButtons : MonoBehaviour
         stopButton.onSelectEntered.AddListener(OnStopButtonPressed);
     }
 
+    //When this button is pressed, an audioclip and a text will display 
+    //unless the first soul has been summoned - in that case only the text will show
     public void OnButton1Pressed(XRBaseInteractor interactor)
     {
         if (!isFirstSoulSummoned) 
@@ -71,6 +71,7 @@ public class GrimGuideButtons : MonoBehaviour
         DisplayTextFromFile("Text3");
     }
 
+//Method to display text from Grimbooktext.txt (in riddle folder)
     private void DisplayTextFromFile(string key)
     {
         if (textFile != null && displayText != null)

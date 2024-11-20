@@ -6,16 +6,20 @@ using UnityEngine.SceneManagement;
 
 public class SoulThrow : MonoBehaviour
 {
-    public XRGrabInteractable grabInteractable;
+    public XRGrabInteractable grabInteractable; // Reference to the Soul
     public Rigidbody soulRigidbody;
+
+    //Reference for the scoreboard texts
     public TMP_Text scoreText;
     public TMP_Text correctText;
     public TMP_Text wrongText;
     public TMP_Text timerText;
+
     private int score = 0;
     private int correctAnswers = 0;
     private int wrongAnswers = 0;
     public float timer = 60f;
+
     private Vector3 initialPosition = new Vector3(-0.3337124f, 1.596273f, -6.39f);
     private bool isBeingHeld = false;
     private bool isGoodSoul;
@@ -26,10 +30,9 @@ public class SoulThrow : MonoBehaviour
     public AudioSource badSoulInHeavenAudio;
     public AudioSource goodSoulInHellAudio;
     public AudioSource missedThrowAudio;
-
-    public AudioSource gameOverAudio; // Audio for game over
-    public AudioSource winAudio; // Audio for winning
-    public AudioSource backgroundAudio; // Optional background sound
+    public AudioSource gameOverAudio;
+    public AudioSource winAudio;
+    public AudioSource backgroundAudio;
 
     public GameObject gameOverPanel;
     public GameObject winPanel;
@@ -45,7 +48,7 @@ public class SoulThrow : MonoBehaviour
 
     private bool gameOverTriggered = false;
     private bool winTriggered = false;
-    private bool gameActive = true; // Default to true for gameplay
+    private bool gameActive = true;
 
     public GrimGuideButtons grimGuideButtons; // Reference to GrimGuideButtons script
 

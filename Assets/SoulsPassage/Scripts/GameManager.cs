@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Method to start the timer when the button is pressed
+    // Method to start the timer when "SummonSoulButton" is pressed
     public void StartTimer()
     {
         isGameActive = true;  // Set the game as active
@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
     {
         if (isGameActive)
         {
-            correctAnswers++;      // Increment correct answers
+            correctAnswers++;     
             UpdateScoreText();     // Update the score display
         }
     }
@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
     {
         if (isGameActive)
         {
-            wrongAnswers++;        // Increment wrong answers
+            wrongAnswers++;       
             UpdateScoreText();     // Update the score display
         }
     }
@@ -91,13 +91,14 @@ public class GameManager : MonoBehaviour
         Debug.Log("Game Over! Final Score: " + totalScore);
     }
 
+    //This method will quit the game
     public void QuitGame()
     {
         #if UNITY_EDITOR
-        // If running in the Unity Editor, stop playing
+       
         UnityEditor.EditorApplication.isPlaying = false;
         #else
-        // If running as a standalone build, close the application
+
         Application.Quit();
         #endif
     }

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b1eb01efff5f9548aab6871068b1687, type: 3}
   m_Name: Riddle14
   m_EditorClassIdentifier: 
-  riddleText: '"When you subtract me from 6, the result is 2. What number am I?"'
+  riddleText: '"Do male seahorses give birth? "'
   isGoodSoul: 1

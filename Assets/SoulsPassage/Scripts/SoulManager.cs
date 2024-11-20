@@ -5,13 +5,13 @@ using TMPro;
 
 public class SoulManager : MonoBehaviour
 {
-    public TextMeshProUGUI riddleText;  // Reference to the TextMeshPro component for displaying the riddle
+    public TextMeshProUGUI riddleText;  // Reference to the text displaying the riddle
     public GameObject soul;  // Reference to the Soul particle system
-    [SerializeField] private Riddle[] riddles;  // Array of Riddle ScriptableObject references
+    [SerializeField] 
+    private Riddle[] riddles;  // Array of Riddle ScriptableObject references
     private int currentRiddleIndex = 0;  // Keeps track of which riddle to show
 
-    // Reference to SoulThrow to set the soul's status
-    public SoulThrow soulThrow;
+    public SoulThrow soulThrow; // Reference to SoulThrow to set the soul's status
 
     // Audio sources for sounds
     public AudioSource bookPageAudioSource;  // Audio source for the book page sound
@@ -46,7 +46,6 @@ public class SoulManager : MonoBehaviour
     {
         if (currentRiddleIndex < riddles.Length)
         {
-            // Ensure the soul is visible and riddle text is updated
             soul.SetActive(true);  // Activate the soul particle system
             riddleText.text = riddles[currentRiddleIndex].riddleText;  // Set riddle text
 
@@ -62,10 +61,6 @@ public class SoulManager : MonoBehaviour
 
             // Move to the next riddle for the next button press
             currentRiddleIndex++;
-        }
-        else
-        {
-            riddleText.text = "No more riddles!";
         }
     }
 
