@@ -164,6 +164,9 @@ https://assetstore.unity.com/packages/3d/props/interior/picture-frames-with-phot
 video background
 https://picjumbo.com/
 
+play button
+https://www.flaticon.com/free-icon/play-button_6388835
+
 Font
 https://ggbot.itch.io/unutterable-font/download/eyJpZCI6MTcwODg1OSwiZXhwaXJlcyI6MTczMTc0NzMxMX0%3d.crSRf6nLeC8kpsJb%2biZV9Bu%2bcMs%3d
 
