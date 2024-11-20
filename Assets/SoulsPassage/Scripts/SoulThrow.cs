@@ -47,6 +47,9 @@ public class SoulThrow : MonoBehaviour
     private bool winTriggered = false;
     private bool gameActive = true; // Default to true for gameplay
 
+    public GrimGuideButtons grimGuideButtons; // Reference to GrimGuideButtons script
+
+
     private void Start()
     {
         UpdateScoreText();
@@ -186,7 +189,7 @@ public class SoulThrow : MonoBehaviour
         }
     }
 
-    public void OnButtonPress()
+   public void OnButtonPress()
     {
         if (!gameActive)
         {
@@ -196,6 +199,13 @@ public class SoulThrow : MonoBehaviour
 
         ResetSoulPosition();
         soulManager.ShowRiddleAndSoul();
+
+        // When the first soul is summoned, set isFirstSoulSummoned to true
+        if (!grimGuideButtons.isFirstSoulSummoned)
+        {
+            grimGuideButtons.FirstSoulSummoned(); // Set isFirstSoulSummoned to true
+        }
+
         Debug.Log("New soul summoned!");
     }
 

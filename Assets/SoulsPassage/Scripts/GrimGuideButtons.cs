@@ -29,6 +29,8 @@ public class GrimGuideButtons : MonoBehaviour
 
     private SoulManager soulManager; // Reference to SoulManager to access its audio sources
 
+    public bool isFirstSoulSummoned = false; // Flag to track if the first soul is summoned
+
     private void Start()
     {
         // Get the SoulManager component
@@ -44,19 +46,28 @@ public class GrimGuideButtons : MonoBehaviour
 
     public void OnButton1Pressed(XRBaseInteractor interactor)
     {
-        PlaySound(audioSource1, buttonSound1);
+        if (!isFirstSoulSummoned) 
+        {
+            PlaySound(audioSource1, buttonSound1);
+        }
         DisplayTextFromFile("Text1");
     }
 
     public void OnButton2Pressed(XRBaseInteractor interactor)
     {
-        PlaySound(audioSource2, buttonSound2);
+        if (!isFirstSoulSummoned) 
+        {
+            PlaySound(audioSource2, buttonSound2);
+        }
         DisplayTextFromFile("Text2");
     }
 
     public void OnButton3Pressed(XRBaseInteractor interactor)
     {
-        PlaySound(audioSource3, buttonSound3);
+        if (!isFirstSoulSummoned) 
+        {
+            PlaySound(audioSource3, buttonSound3);
+        }
         DisplayTextFromFile("Text3");
     }
 
@@ -115,18 +126,17 @@ public class GrimGuideButtons : MonoBehaviour
         soulThrowScript.StopAllSounds();  // Stop all audio in SoulThrow
     }
 
- private void StopAllSounds()
-{
-    foreach (AudioSource source in FindObjectsOfType<AudioSource>())
+    private void StopAllSounds()
     {
-        // Skip stopping the background audio source
-        if (source != backgroundAudioSource && source.isPlaying)
+        foreach (AudioSource source in FindObjectsOfType<AudioSource>())
         {
-            source.Stop();
+            // Skip stopping the background audio source
+            if (source != backgroundAudioSource && source.isPlaying)
+            {
+                source.Stop();
+            }
         }
     }
-}
-
 
     private void PlayBackgroundMusic()
     {
@@ -136,5 +146,11 @@ public class GrimGuideButtons : MonoBehaviour
             backgroundAudioSource.loop = true;
             backgroundAudioSource.Play();
         }
+    }
+
+    // This function is called when the first soul is summoned
+    public void FirstSoulSummoned()
+    {
+        isFirstSoulSummoned = true;
     }
 }
